@@ -2,14 +2,21 @@
 djangocms-page-sitemap
 ======================
 
-.. image:: https://badge.fury.io/py/djangocms-page-sitemap.png
-    :target: https://badge.fury.io/py/djangocms-page-sitemap
+.. image:: https://pypip.in/v/djangocms-page-sitemap/badge.png
+        :target: https://pypi.python.org/pypi/djangocms-page-sitemap
+        :alt: Latest PyPI version
 
 .. image:: https://travis-ci.org/nephila/djangocms-page-sitemap.png?branch=master
-    :target: https://travis-ci.org/nephila/djangocms-page-sitemap
+        :target: https://travis-ci.org/nephila/djangocms-page-sitemap
+        :alt: Latest Travis CI build status
 
-.. image:: https://coveralls.io/repos/nephila/djangocms-page-sitemap/badge.png?branch=master
-    :target: https://coveralls.io/r/nephila/djangocms-page-sitemap?branch=master
+.. image:: https://pypip.in/d/djangocms-page-sitemap/badge.png
+        :target: https://pypi.python.org/pypi/djangocms-page-sitemap
+        :alt: Monthly downloads
+
+.. image:: https://coveralls.io/repos/nephila/djangocms-page-sitemap/badge.png
+        :target: https://coveralls.io/r/nephila/djangocms-page-sitemap
+        :alt: Test coverage
 
 
 django CMS page extension to handle sitemap customization
