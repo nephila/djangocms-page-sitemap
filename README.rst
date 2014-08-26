@@ -11,6 +11,7 @@ djangocms-page-sitemap
 .. image:: https://coveralls.io/repos/nephila/djangocms-page-sitemap/badge.png?branch=master
     :target: https://coveralls.io/r/nephila/djangocms-page-sitemap?branch=master
 
+
 django CMS page extension to handle sitemap customization
 
 
