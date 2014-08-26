@@ -5,7 +5,6 @@ from cms.toolbar.items import Break
 from cms.toolbar_pool import toolbar_pool
 from cms.toolbar_base import CMSToolbar
 from cms.utils import get_cms_setting
-from cms.utils.i18n import get_language_object
 from cms.utils.permissions import has_page_change_permission
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.utils.translation import ugettext_lazy as _
