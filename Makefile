@@ -24,18 +24,18 @@ clean-pyc:
 
 lint:
 	flake8 djangocms_page_sitemap tests
+	djangocms-helper djangocms_page_sitemap pyflakes --cms
 
 test:
-	python runtests.py test
+	djangocms-helper djangocms_page_sitemap test --cms --nose
 
 test-all:
 	tox
 
 coverage:
-	coverage run --source djangocms_page_sitemap setup.py test
+	djangocms-helper djangocms_page_sitemap test --cms --nose --runner-options=--with-coverage,--cover-package=djangocms_page_sitemap
 	coverage report -m
 	coverage html
-	open htmlcov/index.html
 
 release: clean
 	python setup.py sdist upload
