@@ -5,7 +5,7 @@ from cms.utils.compat.dj import python_2_unicode_compatible
 from django.core.cache import cache
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-from django.db.models.signals import pre_delete
+from django.db.models.signals import pre_delete, post_save
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 
@@ -29,6 +29,11 @@ extension_pool.register(PageSitemapProperties)
 # Cache cleanup when deleting pages / editing page extensions
 @receiver(pre_delete, sender=Page)
 def cleanup_page(sender, instance, **kwargs):
-    for language in instance.get_languages():
-        key = get_cache_key(instance, language)
-        cache.delete(key)
+    key = get_cache_key(instance)
+    cache.delete(key)
+
+
+@receiver(post_save, sender=PageSitemapProperties)
+def cleanup_pagemeta(sender, instance, **kwargs):
+    key = get_cache_key(instance.extended_object)
+    cache.delete(key)

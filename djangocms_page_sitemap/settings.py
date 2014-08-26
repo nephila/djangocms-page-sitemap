@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from cms.utils import get_cms_setting
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
@@ -12,3 +13,4 @@ PAGE_SITEMAP_CHANGEFREQ_DEFAULT = {
     'never': _(u'never'),
 }
 PAGE_SITEMAP_CHANGEFREQ = getattr(settings, 'PAGE_SITEMAP_CHANGEFREQ', PAGE_SITEMAP_CHANGEFREQ_DEFAULT)
+PAGE_SITEMAP_CACHE = get_cms_setting('CACHE_DURATIONS')['menus']

@@ -14,6 +14,9 @@ from django.utils.translation import ugettext_lazy as _
 from .models import PageSitemapProperties
 
 
+PAGE_SITEMAP_MENU_TITLE = _(u'Sitemap properties')
+
+
 @toolbar_pool.register
 class PageSitemapPropertiesMeta(CMSToolbar):
     def populate(self):
@@ -49,10 +52,10 @@ class PageSitemapPropertiesMeta(CMSToolbar):
                     url = "%s?extended_object=%s" % (
                         reverse('admin:djangocms_page_sitemap_pagesitemapproperties_add'),
                         self.page.pk)
-            except NoReverseMatch:
+            except NoReverseMatch:  # pragma: no cover
                 # not in urls
                 pass
             else:
-                current_page_menu.add_modal_item(_(u'Sitemap properties'),
+                current_page_menu.add_modal_item(PAGE_SITEMAP_MENU_TITLE,
                                                  url=url, disabled=not_edit_mode,
                                                  position=position)
