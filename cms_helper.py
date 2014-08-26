@@ -2,7 +2,21 @@
 gettext = lambda s: s
 
 HELPER_SETTINGS = {
-        'NOSE_ARGS':['-s'],
+        'NOSE_ARGS':[
+            '-s',
+            '--with-coverage',
+            '--cover-package=djangocms_page_sitemap',
+        ],
+        'CACHES': {
+            'default': {
+                'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            }
+        },
+        'CMS_CACHE_DURATIONS':{
+            'menus': 10,
+            'content': 10,
+            'permissions': 10,
+        },
         'ROOT_URLCONF':'tests.test_utils.urls',
         'INSTALLED_APPS':[
             'django.contrib.sitemaps',
