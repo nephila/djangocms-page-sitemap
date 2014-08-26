@@ -4,8 +4,6 @@ gettext = lambda s: s
 HELPER_SETTINGS = {
         'NOSE_ARGS':[
             '-s',
-            '--with-coverage',
-            '--cover-package=djangocms_page_sitemap',
         ],
         'CACHES': {
             'default': {
