@@ -41,4 +41,6 @@ Quickstart
 Features
 --------
 
-* TODO
+* Support for changefreq and priority customisation per-page
+* Values are cached
+* django CMS toolbar integration
