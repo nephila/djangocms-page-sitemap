@@ -33,9 +33,9 @@ test-all:
 	tox
 
 coverage:
-	djangocms-helper djangocms_page_sitemap test --cms --nose --runner-options=--with-coverage,--cover-package=djangocms_page_sitemap
+	coverage erase
+	coverage run `which djangocms-helper` djangocms_page_sitemap test --cms --nose
 	coverage report -m
-	coverage html
 
 release: clean
 	python setup.py sdist upload
