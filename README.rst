@@ -34,7 +34,7 @@ Quickstart
     INSTALLED_APPS = [
         ...
         'django.contrib.sitemaps',
-        'djangocms_page_meta',
+        'djangocms_page_sitemap',
     ]
 
 * Add to the urlconf, eventually removing django CMS sitemap::
