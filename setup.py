@@ -41,6 +41,7 @@ setup(
     license='GPLv2+',
     zip_safe=False,
     keywords='djangocms-page-sitemap',
+    test_suite='cms_helper.run',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Framework :: Django',
