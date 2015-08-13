@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from django.utils.timezone import now
 from django.core.cache import cache
+from django.utils.timezone import now
 from djangocms_page_sitemap.models import PageSitemapProperties
 from djangocms_page_sitemap.sitemap import ExtendedSitemap
 from djangocms_page_sitemap.utils import get_cache_key
@@ -19,7 +19,7 @@ class SitemapTest(BaseTest):
     def test_sitemap_extended(self):
         test_string = '<url><loc>http://example.com/it/</loc><lastmod>%s</lastmod><changefreq>never</changefreq><priority>0.2</priority></url>' % now().strftime('%Y-%m-%d')
         page1, page2 = self.get_pages()
-        page_ext = PageSitemapProperties.objects.create(
+        PageSitemapProperties.objects.create(
             extended_object=page1, priority='0.2', changefreq='never')
         page1.publish('it')
         sitemap = self.client.get('/sitemap.xml')
@@ -27,9 +27,9 @@ class SitemapTest(BaseTest):
 
     def test_sitemap_cache(self):
         page1, page2 = self.get_pages()
-        page_ext = PageSitemapProperties.objects.create(
+        PageSitemapProperties.objects.create(
             extended_object=page1, priority='0.2', changefreq='never')
-        page_ext_2 = PageSitemapProperties.objects.create(
+        PageSitemapProperties.objects.create(
             extended_object=page2, priority='0.8', changefreq='hourly')
         page1.publish('it')
         page1 = page1.get_public_object()

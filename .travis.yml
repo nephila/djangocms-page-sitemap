@@ -2,6 +2,8 @@
 
 language: python
 
+sudo: false
+
 python:
   - 3.4
   - 3.3
@@ -10,20 +12,66 @@ python:
 
 env:
   matrix:
-  - DJANGO='django>=1.5,<1.6'
-  - DJANGO='django>=1.6,<1.7'
+  - DJANGO='django16' CMS='cms30'
+  - DJANGO='django16' CMS='cms31'
+  - DJANGO='django16' CMS='cms32'
+  - DJANGO='django17' CMS='cms30'
+  - DJANGO='django17' CMS='cms31'
+  - DJANGO='django17' CMS='cms32'
+  - TOXENV='pep8'
+  - TOXENV='isort'
 
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install:
-  - pip install $DJANGO
-  - pip install -r requirements-test.txt
+  - pip install -U tox>=1.8 coveralls
+  - "if [[ $TRAVIS_PYTHON_VERSION == '2.6' ]]; then export PYVER=py26; fi"
+  - "if [[ $TRAVIS_PYTHON_VERSION == '2.7' ]]; then export PYVER=py27; fi"
+  - "if [[ $TRAVIS_PYTHON_VERSION == '3.3' ]]; then export PYVER=py33; fi"
+  - "if [[ $TRAVIS_PYTHON_VERSION == '3.4' ]]; then export PYVER=py34; fi"
+  - "if [[ ${DJANGO}z != 'z' ]]; then export TOXENV=$PYVER-$DJANGO-$CMS; fi"
 
 # command to run tests, e.g. python setup.py test
-script: djangocms-helper djangocms_page_sitemap test --cms --nose
+script: COMMAND='coverage run' tox -e$TOXENV
 
 after_success: coveralls
 
 matrix:
   exclude:
+  - python: 2.6
+    env: TOXENV='pep8'
+  - python: 2.6
+    env: TOXENV='isort'
+  - python: 2.7
+    env: TOXENV='pep8'
+  - python: 2.7
+    env: TOXENV='isort'
+  - python: 3.3
+    env: TOXENV='pep8'
+  - python: 3.3
+    env: TOXENV='isort'
+  - python: 2.6
+    env: DJANGO='django17' CMS='cms30'
+  - python: 2.6
+    env: DJANGO='django17' CMS='cms31'
+  - python: 2.6
+    env: DJANGO='django17' CMS='cms32'
+  - python: 2.6
+    env: DJANGO='django18' CMS='cms31'
+  - python: 2.6
+    env: DJANGO='django18' CMS='cms32'
 
   allow_failures:
+  - python: 2.6
+    env: DJANGO='django16' CMS='cms32'
+  - python: 2.7
+    env: DJANGO='django16' CMS='cms32'
+  - python: 2.7
+    env: DJANGO='django17' CMS='cms32'
+  - python: 3.3
+    env: DJANGO='django16' CMS='cms32'
+  - python: 3.3
+    env: DJANGO='django17' CMS='cms32'
+  - python: 3.4
+    env: DJANGO='django16' CMS='cms32'
+  - python: 3.4
+    env: DJANGO='django17' CMS='cms32'

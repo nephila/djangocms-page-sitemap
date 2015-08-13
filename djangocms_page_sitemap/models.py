@@ -3,14 +3,14 @@ from cms.extensions import PageExtension, extension_pool
 from cms.models import Page
 from cms.utils.compat.dj import python_2_unicode_compatible
 from django.core.cache import cache
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-from django.db.models.signals import pre_delete, post_save
+from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 
-from .utils import get_cache_key
 from .settings import PAGE_SITEMAP_CHANGEFREQ
+from .utils import get_cache_key
 
 
 @python_2_unicode_compatible
