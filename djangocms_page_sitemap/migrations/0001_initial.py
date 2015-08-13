@@ -8,7 +8,7 @@ import django.core.validators
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cms', '0013_auto_20150813_0625'),
+        ('cms', '__latest__'),
     ]
 
     operations = [
