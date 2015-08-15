@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from django.core.cache import cache
 from cms.sitemaps import CMSSitemap
+from django.core.cache import cache
 
 from .models import PageSitemapProperties
 from .settings import PAGE_SITEMAP_CACHE
