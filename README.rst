@@ -22,7 +22,7 @@ djangocms-page-sitemap
     :target: https://coveralls.io/r/nephila/djangocms-page-sitemap?branch=master
     :alt: Test coverage
 
-.. image:: https://img.shields.io/codecov/c/github/nephila/djangocms-page-sitemap/master.svg?style=flat-square
+.. image:: https://img.shields.io/codecov/c/github/nephila/djangocms-page-sitemap/develop.svg?style=flat-square
     :target: https://codecov.io/github/nephila/djangocms-page-sitemap
     :alt: Test coverage
 
