@@ -20,6 +20,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='pagesitemapproperties',
             name='changefreq',
-            field=models.CharField(max_length=20, choices=PAGE_SITEMAP_CHANGEFREQ_LIST, verbose_name='Change frequency'),
+            field=models.CharField(max_length=20, choices=PAGE_SITEMAP_CHANGEFREQ_LIST.items(), verbose_name='Change frequency'),
         ),
     ]
