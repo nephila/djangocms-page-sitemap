@@ -2,21 +2,33 @@
 djangocms-page-sitemap
 ======================
 
-.. image:: https://img.shields.io/pypi/v/djangocms-page-sitemap.svg
-        :target: https://pypi.python.org/pypi/djangocms-page-sitemap
-        :alt: Latest PyPI version
+.. image:: https://img.shields.io/pypi/v/djangocms-page-sitemap.svg?style=flat-square
+    :target: https://pypi.python.org/pypi/djangocms-page-sitemap
+    :alt: Latest PyPI version
 
-.. image:: https://img.shields.io/travis/nephila/djangocms-page-sitemap.svg
-        :target: https://travis-ci.org/nephila/djangocms-page-sitemap
-        :alt: Latest Travis CI build status
+.. image:: https://img.shields.io/pypi/dm/djangocms-page-sitemap.svg?style=flat-square
+    :target: https://pypi.python.org/pypi/djangocms-page-sitemap
+    :alt: Monthly downloads
 
-.. image:: https://img.shields.io/pypi/dm/djangocms-page-sitemap.svg
-        :target: https://pypi.python.org/pypi/djangocms-page-sitemap
-        :alt: Monthly downloads
+.. image:: https://img.shields.io/pypi/pyversions/djangocms-page-sitemap.svg?style=flat-square
+    :target: https://pypi.python.org/pypi/djangocms-page-sitemap
+    :alt: Python versions
 
-.. image:: https://coveralls.io/repos/nephila/djangocms-page-sitemap/badge.png
-        :target: https://coveralls.io/r/nephila/djangocms-page-sitemap
-        :alt: Test coverage
+.. image:: https://img.shields.io/travis/nephila/djangocms-page-sitemap.svg?style=flat-square
+    :target: https://travis-ci.org/nephila/djangocms-page-sitemap
+    :alt: Latest Travis CI build status
+
+.. image:: https://img.shields.io/coveralls/nephila/djangocms-page-sitemap/master.svg?style=flat-square
+    :target: https://coveralls.io/r/nephila/djangocms-page-sitemap?branch=master
+    :alt: Test coverage
+
+.. image:: https://img.shields.io/codecov/c/github/nephila/djangocms-page-sitemap/master.svg?style=flat-square
+    :target: https://codecov.io/github/nephila/djangocms-page-sitemap
+    :alt: Test coverage
+
+.. image:: https://codeclimate.com/github/nephila/djangocms-page-sitemap/badges/gpa.svg?style=flat-square
+   :target: https://codeclimate.com/github/nephila/djangocms-page-sitemap
+   :alt: Code Climate
 
 django CMS page extension to handle sitemap customization
 
@@ -26,6 +38,7 @@ Support Python version:
 * Python 2.7
 * Python 3.3
 * Python 3.4
+* Python 3.5
 
 Supported Django versions:
 
