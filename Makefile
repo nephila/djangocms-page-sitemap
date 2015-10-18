@@ -24,22 +24,23 @@ clean-pyc:
 	find . -name '*~' -exec rm -f {} +
 
 lint:
-	flake8 djangocms-page-sitemap tests
-	djangocms-helper djangocms-page-sitemap pyflakes --cms
+	flake8 djangocms_page_sitemap tests
+	djangocms-helper djangocms_page_sitemap pyflakes --cms
 
 test:
-	djangocms-helper djangocms-page-sitemap test --cms --nose
+	djangocms-helper djangocms_page_sitemap test --cms --nose
 
 test-all:
 	tox
 
 coverage:
 	coverage erase
-	coverage run `which djangocms-helper` djangocms-page-sitemap test --cms --nose
+	coverage run `which djangocms-helper` djangocms_page_sitemap test --cms --nose
 	coverage report -m
 
 release: clean
-	python setup.py sdist bdist_wheel upload
+	python setup.py clean --all sdist bdist_wheel
+	twine upload dist/*
 
 sdist: clean
 	python setup.py sdist

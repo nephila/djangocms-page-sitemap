@@ -3,10 +3,11 @@
 History
 -------
 
-0.3.0 (XXXX-XX-XX)
+0.3.0 (2015-10-18)
 ++++++++++++++++++
 
 * Add Python 3.5
+* Add option to exclude page from sitemap
 
 0.2.0 (2015-08-15)
 ++++++++++++++++++
