@@ -3,12 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Matas Dailyda <matas@dailyda.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: djangocms-page-sitemap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-13 06:47+0200\n"
-"PO-Revision-Date: 2015-08-13 04:48+0000\n"
+"POT-Creation-Date: 2015-10-18 15:49+0200\n"
+"PO-Revision-Date: 2015-10-18 13:49+0000\n"
 "Last-Translator: yakky <i.spalletti@nephila.it>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/nephila/djangocms-page-sitemap/language/lt/)\n"
 "MIME-Version: 1.0\n"
@@ -17,47 +18,51 @@ msgstr ""
 "Language: lt\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: cms_toolbar.py:14
+#: cms_toolbar.py:16
 msgid "Sitemap properties"
-msgstr ""
-
-#: models.py:18
-msgid "Change frequency"
-msgstr ""
+msgstr "Tinklalapio struktūros nustatymai"
 
 #: models.py:20
+msgid "Change frequency"
+msgstr "Keitimo dažnumas"
+
+#: models.py:22
 msgid "Priority"
-msgstr ""
+msgstr "Prioritetas"
 
 #: models.py:25
+msgid "Include in sitemap"
+msgstr ""
+
+#: models.py:28
 #, python-format
 msgid "Sitemap values for Page %s"
-msgstr ""
-
-#: settings.py:7
-msgid "always"
-msgstr ""
-
-#: settings.py:8
-msgid "hourly"
-msgstr ""
+msgstr "Tinklalapio struktūros duomenys puslapiams %s"
 
 #: settings.py:9
-msgid "daily"
-msgstr ""
+msgid "always"
+msgstr "visada"
 
 #: settings.py:10
-msgid "weekly"
-msgstr ""
+msgid "hourly"
+msgstr "kas valandą"
 
 #: settings.py:11
-msgid "monthly"
-msgstr ""
+msgid "daily"
+msgstr "kas dieną"
 
 #: settings.py:12
-msgid "yearly"
-msgstr ""
+msgid "weekly"
+msgstr "kas savaitę"
 
 #: settings.py:13
+msgid "monthly"
+msgstr "kas mėnesį"
+
+#: settings.py:14
+msgid "yearly"
+msgstr "kas metus"
+
+#: settings.py:15
 msgid "never"
-msgstr ""
+msgstr "niekada"

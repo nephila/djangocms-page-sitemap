@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: djangocms-page-sitemap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-13 06:47+0200\n"
-"PO-Revision-Date: 2015-08-13 04:48+0000\n"
+"POT-Creation-Date: 2015-10-18 15:49+0200\n"
+"PO-Revision-Date: 2015-10-18 13:49+0000\n"
 "Last-Translator: yakky <i.spalletti@nephila.it>\n"
 "Language-Team: Turkish (http://www.transifex.com/nephila/djangocms-page-sitemap/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -17,47 +17,51 @@ msgstr ""
 "Language: tr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: cms_toolbar.py:14
+#: cms_toolbar.py:16
 msgid "Sitemap properties"
 msgstr ""
 
-#: models.py:18
+#: models.py:20
 msgid "Change frequency"
 msgstr ""
 
-#: models.py:20
+#: models.py:22
 msgid "Priority"
 msgstr ""
 
 #: models.py:25
+msgid "Include in sitemap"
+msgstr ""
+
+#: models.py:28
 #, python-format
 msgid "Sitemap values for Page %s"
 msgstr ""
 
-#: settings.py:7
+#: settings.py:9
 msgid "always"
 msgstr ""
 
-#: settings.py:8
+#: settings.py:10
 msgid "hourly"
 msgstr ""
 
-#: settings.py:9
+#: settings.py:11
 msgid "daily"
 msgstr ""
 
-#: settings.py:10
+#: settings.py:12
 msgid "weekly"
 msgstr ""
 
-#: settings.py:11
+#: settings.py:13
 msgid "monthly"
 msgstr ""
 
-#: settings.py:12
+#: settings.py:14
 msgid "yearly"
 msgstr ""
 
-#: settings.py:13
+#: settings.py:15
 msgid "never"
 msgstr ""
