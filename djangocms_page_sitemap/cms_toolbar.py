@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import, print_function, unicode_literals
+
 from cms.api import get_page_draft
 from cms.cms_toolbar import PAGE_MENU_THIRD_BREAK
 from cms.toolbar.items import Break
@@ -11,7 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from .models import PageSitemapProperties
 
-PAGE_SITEMAP_MENU_TITLE = _(u'Sitemap properties')
+PAGE_SITEMAP_MENU_TITLE = _('Sitemap properties')
 
 
 @toolbar_pool.register
