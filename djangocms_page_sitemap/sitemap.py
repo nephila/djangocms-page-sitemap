@@ -13,6 +13,11 @@ class ExtendedSitemap(CMSSitemap):
     default_changefreq = CMSSitemap.changefreq
     default_priority = CMSSitemap.priority
 
+    def items(self):
+        return super(ExtendedSitemap, self).items().exclude(
+            page__pagesitemapproperties__include_in_sitemap=False
+        )
+
     def priority(self, title):
         ext_key = get_cache_key(title.page)
         properties = cache.get(ext_key)

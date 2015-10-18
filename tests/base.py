@@ -29,14 +29,18 @@ class BaseTest(TestCase):
 
     def get_pages(self):
         from cms.api import create_page, create_title
-        page = create_page('page one', 'page.html', language='en')
+        page_1 = create_page('page one', 'page.html', language='en')
         page_2 = create_page('page two', 'page.html', language='en')
-        create_title(language='fr', title='page un', page=page)
-        create_title(language='it', title='pagina uno', page=page)
+        page_3 = create_page('page three', 'page.html', language='en')
+        create_title(language='fr', title='page un', page=page_1)
+        create_title(language='it', title='pagina uno', page=page_1)
+        create_title(language='fr', title='page trois', page=page_3)
         for lang in self.languages:
-            page.publish(lang)
+            page_1.publish(lang)
         page_2.publish('en')
-        return page.get_draft_object(), page_2.get_draft_object()
+        page_3.publish('en')
+        page_3.publish('fr')
+        return page_1.get_draft_object(), page_2.get_draft_object(), page_3.get_draft_object()
 
     def get_request(self, page, lang):
         request = self.request_factory.get(page.get_path(lang))
