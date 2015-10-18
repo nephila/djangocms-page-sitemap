@@ -32,7 +32,7 @@ class ToolbarTest(BaseTest):
         Test that no page menu is present if user has no perm
         """
         from cms.toolbar.toolbar import CMSToolbar
-        page1, page2 = self.get_pages()
+        page1, page2, page3 = self.get_pages()
         request = self.get_page_request(page1, self.user_staff, '/', edit=True)
         toolbar = CMSToolbar(request)
         toolbar.get_left_items()
@@ -44,7 +44,7 @@ class ToolbarTest(BaseTest):
         Test that page meta menu is present if user has Page.change_perm
         """
         from cms.toolbar.toolbar import CMSToolbar
-        page1, page2 = self.get_pages()
+        page1, page2, page3 = self.get_pages()
         self.user_staff.user_permissions.add(Permission.objects.get(codename='change_page'))
         self.user_staff = User.objects.get(pk=self.user_staff.pk)
         request = self.get_page_request(page1, self.user_staff, '/', edit=True)
@@ -59,7 +59,7 @@ class ToolbarTest(BaseTest):
         Test that no page menu is present if user has general page Page.change_perm  but not permission on current page
         """
         from cms.toolbar.toolbar import CMSToolbar
-        page1, page2 = self.get_pages()
+        page1, page2, page3 = self.get_pages()
         self.user_staff.user_permissions.add(Permission.objects.get(codename='change_page'))
         self.user_staff = User.objects.get(pk=self.user_staff.pk)
         request = self.get_page_request(page1, self.user_staff, '/', edit=True)
@@ -73,7 +73,7 @@ class ToolbarTest(BaseTest):
         Test that PageSitemapProperties item is present for superuser
         """
         from cms.toolbar.toolbar import CMSToolbar
-        page1, page2 = self.get_pages()
+        page1, page2, page3 = self.get_pages()
         request = self.get_page_request(page1, self.user, '/', edit=True)
         toolbar = CMSToolbar(request)
         toolbar.get_left_items()
@@ -85,7 +85,7 @@ class ToolbarTest(BaseTest):
         Test that PageSitemapProperties item is present for superuser if PageSitemapProperties exists for current page
         """
         from cms.toolbar.toolbar import CMSToolbar
-        page1, page2 = self.get_pages()
+        page1, page2, page3 = self.get_pages()
         page_ext = PageSitemapProperties.objects.create(
             extended_object=page1, priority='0.2', changefreq='never')
         request = self.get_page_request(page1, self.user, '/', edit=True)

@@ -21,25 +21,43 @@ class SitemapTest(BaseTest):
 
     def test_sitemap_extended(self):
         test_string = '<url><loc>http://example.com/it/</loc><lastmod>%s</lastmod><changefreq>never</changefreq><priority>0.2</priority></url>' % now().strftime('%Y-%m-%d')
-        page1, page2 = self.get_pages()
+        page1, page2, page3 = self.get_pages()
         PageSitemapProperties.objects.create(
-            extended_object=page1, priority='0.2', changefreq='never')
+            extended_object=page1, priority='0.2', changefreq='never'
+        )
         page1.publish('it')
         sitemap = self.client.get('/sitemap.xml')
         self.assertContains(sitemap, test_string)
 
+    def test_sitemap_exclude(self):
+        page1, page2, page3 = self.get_pages()
+        PageSitemapProperties.objects.create(
+            extended_object=page3, priority='0.2', changefreq='never', include_in_sitemap=False
+        )
+        sitemap = ExtendedSitemap()
+        # unpublished since change, still in the sitemap
+        self.assertEqual(len(sitemap.items()), 6)
+
+        page3.publish('en')
+        page3.publish('fr')
+        sitemap = ExtendedSitemap()
+        # published, then no longer in the sitemap
+        self.assertEqual(len(sitemap.items()), 4)
+
     def test_sitemap_cache(self):
-        page1, page2 = self.get_pages()
+        page1, page2, page3 = self.get_pages()
         PageSitemapProperties.objects.create(
-            extended_object=page1, priority='0.2', changefreq='never')
+            extended_object=page1, priority='0.2', changefreq='never'
+        )
         PageSitemapProperties.objects.create(
-            extended_object=page2, priority='0.8', changefreq='hourly')
+            extended_object=page2, priority='0.8', changefreq='hourly'
+        )
         page1.publish('it')
         page1 = page1.get_public_object()
         page2.publish('it')
         page2 = page2.get_public_object()
         sitemap = ExtendedSitemap()
-        self.assertEqual(len(sitemap.items()), 4)
+        self.assertEqual(len(sitemap.items()), 6)
         for item in sitemap.items():
             if item.page.pk == page1.pk:
                 self.assertEqual(sitemap.changefreq(item), 'never')

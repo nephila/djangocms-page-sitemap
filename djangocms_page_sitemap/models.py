@@ -22,6 +22,7 @@ class PageSitemapProperties(PageExtension):
     priority = models.DecimalField(_('Priority'), decimal_places=1,
                                    max_digits=2,
                                    validators=[MinValueValidator(0), MaxValueValidator(1)])
+    include_in_sitemap = models.BooleanField(_('Include in sitemap'), default=True)
 
     def __str__(self):
         return _('Sitemap values for Page %s') % self.extended_object.pk

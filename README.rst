@@ -51,6 +51,15 @@ Supported django CMS versions:
 * django CMS 3.x
 
 
+Features
+--------
+
+* Support for changefreq and priority customisation per-page
+* Option to exclude a page from the Sitemap
+* Values are cached
+* django CMS toolbar integration
+
+
 Quickstart
 ----------
 
@@ -83,11 +92,3 @@ Since version 0.2 ``djangocms-page-sitemap`` ships with migrations both for sout
 When upgrading you need to fake the migration to avoid errors::
 
     $ python manage.py migrate djangocms_page_meta --fake
-
-
-Features
---------
-
-* Support for changefreq and priority customisation per-page
-* Values are cached
-* django CMS toolbar integration
