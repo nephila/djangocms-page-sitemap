@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 from django.test.utils import override_settings
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
+
 from djangocms_page_sitemap.cms_toolbar import PAGE_SITEMAP_MENU_TITLE
 from djangocms_page_sitemap.models import PageSitemapProperties
 
