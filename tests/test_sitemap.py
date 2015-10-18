@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import, print_function, unicode_literals
+
 from django.core.cache import cache
 from django.utils.timezone import now
+
 from djangocms_page_sitemap.models import PageSitemapProperties
 from djangocms_page_sitemap.sitemap import ExtendedSitemap
 from djangocms_page_sitemap.utils import get_cache_key
 
-from . import BaseTest
+from .base import BaseTest
 
 
 class SitemapTest(BaseTest):

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import, print_function, unicode_literals
 
 gettext = lambda s: s
 
@@ -57,5 +58,5 @@ def run():
     from djangocms_helper import runner
     runner.cms('djangocms_page_sitemap')
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     run()

@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import, print_function, unicode_literals
+
 from cms.extensions import PageExtension, extension_pool
 from cms.models import Page
 from cms.utils.compat.dj import python_2_unicode_compatible
@@ -15,14 +17,14 @@ from .utils import get_cache_key
 
 @python_2_unicode_compatible
 class PageSitemapProperties(PageExtension):
-    changefreq = models.CharField(_(u'Change frequency'), max_length=20,
+    changefreq = models.CharField(_('Change frequency'), max_length=20,
                                   choices=PAGE_SITEMAP_CHANGEFREQ.items())
-    priority = models.DecimalField(_(u'Priority'), decimal_places=1,
+    priority = models.DecimalField(_('Priority'), decimal_places=1,
                                    max_digits=2,
                                    validators=[MinValueValidator(0), MaxValueValidator(1)])
 
     def __str__(self):
-        return _(u'Sitemap values for Page %s') % self.extended_object.pk
+        return _('Sitemap values for Page %s') % self.extended_object.pk
 extension_pool.register(PageSitemapProperties)
 
 
