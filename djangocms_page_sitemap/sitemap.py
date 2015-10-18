@@ -5,12 +5,12 @@ from cms.sitemaps import CMSSitemap
 from django.core.cache import cache
 
 from .models import PageSitemapProperties
-from .settings import PAGE_SITEMAP_CACHE
+from .settings import PAGE_SITEMAP_CACHE_DURATION, PAGE_SITEMAP_DEFAULT_CHANGEFREQ
 from .utils import get_cache_key
 
 
 class ExtendedSitemap(CMSSitemap):
-    default_changefreq = CMSSitemap.changefreq
+    default_changefreq = PAGE_SITEMAP_DEFAULT_CHANGEFREQ
     default_priority = CMSSitemap.priority
 
     def items(self):
@@ -25,7 +25,7 @@ class ExtendedSitemap(CMSSitemap):
             return properties.priority
         else:
             try:
-                cache.set(ext_key, title.page.pagesitemapproperties, PAGE_SITEMAP_CACHE)
+                cache.set(ext_key, title.page.pagesitemapproperties, PAGE_SITEMAP_CACHE_DURATION)
                 return title.page.pagesitemapproperties.priority
             except PageSitemapProperties.DoesNotExist:
                 return self.default_priority
@@ -37,7 +37,7 @@ class ExtendedSitemap(CMSSitemap):
             return properties.changefreq
         else:
             try:
-                cache.set(ext_key, title.page.pagesitemapproperties, PAGE_SITEMAP_CACHE)
+                cache.set(ext_key, title.page.pagesitemapproperties, PAGE_SITEMAP_CACHE_DURATION)
                 return title.page.pagesitemapproperties.changefreq
             except PageSitemapProperties.DoesNotExist:
                 return self.default_changefreq
