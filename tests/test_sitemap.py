@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, print_function, unicode_literals
 
+from decimal import Decimal
+
 from django.core.cache import cache
 from django.utils.timezone import now
 
@@ -61,10 +63,12 @@ class SitemapTest(BaseTest):
         for item in sitemap.items():
             if item.page.pk == page1.pk:
                 self.assertEqual(sitemap.changefreq(item), 'never')
+                self.assertEqual(sitemap.priority(item), Decimal('0.2'))
                 ext_key = get_cache_key(item.page)
                 self.assertEqual(cache.get(ext_key), item.page.pagesitemapproperties)
             if item.page.pk == page2.pk:
                 self.assertEqual(sitemap.changefreq(item), 'hourly')
+                self.assertEqual(sitemap.priority(item), Decimal('0.8'))
 
         ext_key = get_cache_key(page1)
         page1.pagesitemapproperties.save()
