@@ -11,16 +11,16 @@ from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 
-from .settings import PAGE_SITEMAP_CHANGEFREQ
+from .settings import PAGE_SITEMAP_CHANGEFREQ_LIST
 from .utils import get_cache_key
 
 
 @python_2_unicode_compatible
 class PageSitemapProperties(PageExtension):
-    changefreq = models.CharField(_('Change frequency'), max_length=20,
-                                  choices=PAGE_SITEMAP_CHANGEFREQ.items())
+    changefreq = models.CharField(_('Change frequency'), max_length=20, default='monthly',
+                                  choices=PAGE_SITEMAP_CHANGEFREQ_LIST.items())
     priority = models.DecimalField(_('Priority'), decimal_places=1,
-                                   max_digits=2,
+                                   max_digits=2, default=0.5,
                                    validators=[MinValueValidator(0), MaxValueValidator(1)])
     include_in_sitemap = models.BooleanField(_('Include in sitemap'), default=True)
 

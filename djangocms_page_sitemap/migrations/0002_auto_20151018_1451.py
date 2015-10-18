@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
+from djangocms_page_sitemap.settings import PAGE_SITEMAP_CHANGEFREQ_LIST
 
 
 class Migration(migrations.Migration):
@@ -19,6 +20,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='pagesitemapproperties',
             name='changefreq',
-            field=models.CharField(max_length=20, choices=[('daily', 'daily'), ('yearly', 'yearly'), ('never', 'never'), ('always', 'always'), ('hourly', 'hourly'), ('weekly', 'weekly'), ('monthly', 'monthly')], verbose_name='Change frequency'),
+            field=models.CharField(max_length=20, choices=PAGE_SITEMAP_CHANGEFREQ_LIST.items(), verbose_name='Change frequency'),
         ),
     ]

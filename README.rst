@@ -92,3 +92,11 @@ Since version 0.2 ``djangocms-page-sitemap`` ships with migrations both for sout
 When upgrading you need to fake the migration to avoid errors::
 
     $ python manage.py migrate djangocms_page_meta --fake
+
+
+Settings
+--------
+
+* PAGE_SITEMAP_CHANGEFREQ_LIST: List of frequency changes
+* PAGE_SITEMAP_DEFAULT_CHANGEFREQ: Default changefrequency (default: django CMS value -monthly-)
+* PAGE_SITEMAP_CACHE_DURATION: Cache duration: same as django CMS menu cache)
