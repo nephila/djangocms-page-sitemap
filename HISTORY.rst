@@ -3,6 +3,11 @@
 History
 -------
 
+0.4.0 (unreleased)
+++++++++++++++++++
+
+* Drop compatibility with django CMS 3.1 and below, Django 1.7 and below
+
 0.3.1 (2015-10-18)
 ++++++++++++++++++
 
