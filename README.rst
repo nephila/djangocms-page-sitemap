@@ -34,21 +34,15 @@ django CMS page extension to handle sitemap customization
 
 Support Python version:
 
-* Python 2.6
-* Python 2.7
-* Python 3.3
-* Python 3.4
-* Python 3.5
+* Python 2.7, 3.3, 3.4, 3.5
 
 Supported Django versions:
 
-* Django 1.6
-* Django 1.7
-* Django 1.8
+* Django 1.8, 1.9, 1.10
 
 Supported django CMS versions:
 
-* django CMS 3.x
+* django CMS 3.2+
 
 
 Features
@@ -84,15 +78,12 @@ Quickstart
         url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': {'cmspages': ExtendedSitemap}}),
     )
 
-Upgrading
----------
+Usage
+-----
 
-Since version 0.2 ``djangocms-page-sitemap`` ships with migrations both for south and Django 1.7+.
+After installing as above, you will be able to tune the sitemap setting for each page.
 
-When upgrading you need to fake the migration to avoid errors::
-
-    $ python manage.py migrate djangocms_page_meta --fake
-
+A new menu item ``Sitemap properties`` will be available in the page toolbar.
 
 Settings
 --------
