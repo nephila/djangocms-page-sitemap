@@ -13,6 +13,7 @@ env:
   matrix:
   - TOXENV='pep8'
   - TOXENV='isort'
+  - DJANGO='django110' CMS='cms34'
   - DJANGO='django19' CMS='cms34'
   - DJANGO='django18' CMS='cms34'
   - DJANGO='django19' CMS='cms33'
