@@ -38,7 +38,7 @@ Support Python version:
 
 Supported Django versions:
 
-* Django 1.8, 1.9
+* Django 1.8 to 1.10
 
 Supported django CMS versions:
 
