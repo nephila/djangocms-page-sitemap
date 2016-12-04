@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# fsbraun <fsbraun@gmx.de>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: djangocms-page-sitemap\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-18 15:49+0200\n"
-"PO-Revision-Date: 2015-10-18 13:49+0000\n"
-"Last-Translator: yakky <i.spalletti@nephila.it>\n"
+"PO-Revision-Date: 2016-05-25 21:29+0000\n"
+"Last-Translator: fsbraun <fsbraun@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/nephila/djangocms-page-sitemap/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,49 +20,49 @@ msgstr ""
 
 #: cms_toolbar.py:16
 msgid "Sitemap properties"
-msgstr ""
+msgstr "Sitemap-Einstellungen"
 
 #: models.py:20
 msgid "Change frequency"
-msgstr ""
+msgstr "Anpassungsfrequenz"
 
 #: models.py:22
 msgid "Priority"
-msgstr ""
+msgstr "Priorität"
 
 #: models.py:25
 msgid "Include in sitemap"
-msgstr ""
+msgstr "In Sitemap aufnehmen"
 
 #: models.py:28
 #, python-format
 msgid "Sitemap values for Page %s"
-msgstr ""
+msgstr "Sitemap-Einstellungen für Seite %s"
 
 #: settings.py:9
 msgid "always"
-msgstr ""
+msgstr "fortlaufend"
 
 #: settings.py:10
 msgid "hourly"
-msgstr ""
+msgstr "stündlich"
 
 #: settings.py:11
 msgid "daily"
-msgstr ""
+msgstr "täglich"
 
 #: settings.py:12
 msgid "weekly"
-msgstr ""
+msgstr "wöchentlich"
 
 #: settings.py:13
 msgid "monthly"
-msgstr ""
+msgstr "monatlich"
 
 #: settings.py:14
 msgid "yearly"
-msgstr ""
+msgstr "jährlich"
 
 #: settings.py:15
 msgid "never"
-msgstr ""
+msgstr "nie"

@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Bashar Al-Abdulhadi, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: djangocms-page-sitemap\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-18 15:49+0200\n"
-"PO-Revision-Date: 2015-10-18 13:49+0000\n"
-"Last-Translator: yakky <i.spalletti@nephila.it>\n"
+"PO-Revision-Date: 2016-05-08 13:56+0000\n"
+"Last-Translator: Bashar Al-Abdulhadi\n"
 "Language-Team: Arabic (http://www.transifex.com/nephila/djangocms-page-sitemap/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,49 +20,49 @@ msgstr ""
 
 #: cms_toolbar.py:16
 msgid "Sitemap properties"
-msgstr ""
+msgstr "خصائص خريطة الموقع"
 
 #: models.py:20
 msgid "Change frequency"
-msgstr ""
+msgstr "معدّل تكرار التغيير"
 
 #: models.py:22
 msgid "Priority"
-msgstr ""
+msgstr "الأفضلية"
 
 #: models.py:25
 msgid "Include in sitemap"
-msgstr ""
+msgstr "تضمينه في خريطة الموقع"
 
 #: models.py:28
 #, python-format
 msgid "Sitemap values for Page %s"
-msgstr ""
+msgstr "قيمة الصفحة %s في خريطة الموقع"
 
 #: settings.py:9
 msgid "always"
-msgstr ""
+msgstr "دائما"
 
 #: settings.py:10
 msgid "hourly"
-msgstr ""
+msgstr "كل ساعة"
 
 #: settings.py:11
 msgid "daily"
-msgstr ""
+msgstr "يومي"
 
 #: settings.py:12
 msgid "weekly"
-msgstr ""
+msgstr "إسبوعي"
 
 #: settings.py:13
 msgid "monthly"
-msgstr ""
+msgstr "شهري"
 
 #: settings.py:14
 msgid "yearly"
-msgstr ""
+msgstr "سنوي"
 
 #: settings.py:15
 msgid "never"
-msgstr ""
+msgstr "أبدا"
