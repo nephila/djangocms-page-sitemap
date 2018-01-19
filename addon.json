@@ -1,0 +1,6 @@
+{
+    "package-name": "djangocms-page-sitemap",
+    "installed-apps": [
+        "djangocms_page_sitemap"
+    ]
+}
