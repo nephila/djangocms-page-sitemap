@@ -11,6 +11,7 @@ from django.core.urlresolvers import NoReverseMatch, reverse
 from django.utils.translation import ugettext_lazy as _
 
 from .models import PageSitemapProperties
+
 try:
     from cms.utils.permissions import has_page_permission
 
