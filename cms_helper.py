@@ -25,6 +25,7 @@ HELPER_SETTINGS = {
         'django.contrib.sitemaps',
     ],
     'LANGUAGE_CODE': 'en',
+    'TIME_ZONE': 'UTC',
     'LANGUAGES': (
         ('en', gettext('English')),
         ('fr', gettext('French')),
