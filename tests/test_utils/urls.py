@@ -11,7 +11,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.i18n import javascript_catalog
 from django.views.static import serve
 
-from djangocms_page_sitemap.sitemap import ExtendedSitemap
+from djangocms_page_sitemap import sitemap_urls
 
 admin.autodiscover()
 
@@ -21,10 +21,8 @@ urlpatterns = [
         {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
     url(r'^media/cms/(?P<path>.*)$', serve,
         {'document_root': get_cms_setting('MEDIA_ROOT'), 'show_indexes': True}),
-    url(r'^sitemap\.xml$', sitemap, {
-        'sitemaps': {'cmspages': ExtendedSitemap}
-    }),
     url(r'^jsi18n/(?P<packages>\S+?)/$', javascript_catalog),
+    url(r'^', include(sitemap_urls)),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
