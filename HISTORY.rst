@@ -9,6 +9,7 @@ History
 * Add Django 1.11 support
 * Add django CMS 3.5 support
 * Package as Divio Cloud addon
+* Add support for noindex, noarchive robots meta tag
 
 0.4.1 (2016-12-02)
 ++++++++++++++++++
