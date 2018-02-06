@@ -15,6 +15,7 @@ from .settings import PAGE_SITEMAP_CHANGEFREQ_LIST
 from .utils import get_cache_key
 
 
+@extension_pool.register
 @python_2_unicode_compatible
 class PageSitemapProperties(PageExtension):
     changefreq = models.CharField(_('Change frequency'), max_length=20, default='monthly',
@@ -26,7 +27,6 @@ class PageSitemapProperties(PageExtension):
 
     def __str__(self):
         return _('Sitemap values for Page %s') % self.extended_object.pk
-extension_pool.register(PageSitemapProperties)
 
 
 # Cache cleanup when deleting pages / editing page extensions

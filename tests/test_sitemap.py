@@ -52,12 +52,12 @@ class SitemapTest(BaseTest):
             extended_object=page1, priority='0.2', changefreq='never'
         )
         PageSitemapProperties.objects.create(
-            extended_object=page2, priority='0.8', changefreq='hourly'
+            extended_object=page3, priority='0.8', changefreq='hourly'
         )
-        page1.publish('it')
+        page1.publish('fr')
         page1 = page1.get_public_object()
-        page2.publish('it')
-        page2 = page2.get_public_object()
+        page3.publish('fr')
+        page3 = page3.get_public_object()
         sitemap = ExtendedSitemap()
         self.assertEqual(len(sitemap.items()), 6)
         for item in sitemap.items():
@@ -66,7 +66,7 @@ class SitemapTest(BaseTest):
                 self.assertEqual(sitemap.priority(item), Decimal('0.2'))
                 ext_key = get_cache_key(item.page)
                 self.assertEqual(cache.get(ext_key), item.page.pagesitemapproperties)
-            if item.page.pk == page2.pk:
+            if item.page.pk == page3.pk:
                 self.assertEqual(sitemap.changefreq(item), 'hourly')
                 self.assertEqual(sitemap.priority(item), Decimal('0.8'))
 
@@ -74,6 +74,6 @@ class SitemapTest(BaseTest):
         page1.pagesitemapproperties.save()
         self.assertEqual(cache.get(ext_key), None)
 
-        ext_key = get_cache_key(page2)
-        page2.delete()
+        ext_key = get_cache_key(page3)
+        page3.delete()
         self.assertEqual(cache.get(ext_key), None)

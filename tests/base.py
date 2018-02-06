@@ -40,6 +40,9 @@ class BaseTest(TestCase):
         page_2.publish('en')
         page_3.publish('en')
         page_3.publish('fr')
+        if hasattr(page_1, 'set_as_homepage'):
+            page_1.set_as_homepage()
+
         return page_1.get_draft_object(), page_2.get_draft_object(), page_3.get_draft_object()
 
     def get_request(self, page, lang):

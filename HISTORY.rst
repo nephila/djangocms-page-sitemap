@@ -3,6 +3,13 @@
 History
 -------
 
+0.5.0 (unreleased)
+++++++++++++++++++
+
+* Add Django 1.11 support
+* Add django CMS 3.5 support
+* Package as Divio Cloud addon
+
 0.4.1 (2016-12-02)
 ++++++++++++++++++
 

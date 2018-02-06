@@ -36,7 +36,7 @@ setup(
     ],
     include_package_data=True,
     install_requires=[
-        'django-cms>3',
+        'django-cms>=3.4',
     ],
     license='GPLv2+',
     zip_safe=False,
