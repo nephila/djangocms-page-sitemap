@@ -46,6 +46,11 @@ Quickstart
 
 * Add to the urlconf, eventually removing django CMS sitemap::
 
+
+    from djangocms_page_sitemap import sitemap_urls
+
+    ...
+
     urlpatterns = [
         url(r'^admin/', include(admin.site.urls)),
         ...
@@ -63,6 +68,25 @@ Quickstart
     {% page_robots %}
     </head>
     ...
+
+* If you need to provide a custom sitemap configuration (for example to add more
+  sitemap classes to it, you can append the sitemap url explicitly::
+
+    from django.contrib.sitemaps.views import sitemap
+    from djangocms_page_sitemap.sitemap import ExtendedSitemap
+    from myapp.sitemaps import MySiteSitemap
+
+
+    urlpatterns = patterns(
+        '',
+        ...
+        url(r'^sitemap\.xml$', sitemap,
+            {'sitemaps': {
+                'cmspages': ExtendedSitemap, 'myapp': MySiteSitemap,
+            }
+        }),
+    )
+
 
 Usage
 -----
