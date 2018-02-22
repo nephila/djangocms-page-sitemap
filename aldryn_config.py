@@ -4,15 +4,15 @@ try:
 except ImportError:
     from aldryn_client import forms
 
-    PAGE_SITEMAP_CHANGEFREQ_DEFAULT_LIST = {
-        'always': 'always',
-        'hourly': 'hourly',
-        'daily': 'daily',
-        'weekly': 'weekly',
-        'monthly': 'monthly',
-        'yearly': 'yearly',
-        'never': 'never',
-    }
+PAGE_SITEMAP_CHANGEFREQ_DEFAULT_LIST = {
+    'always': 'always',
+    'hourly': 'hourly',
+    'daily': 'daily',
+    'weekly': 'weekly',
+    'monthly': 'monthly',
+    'yearly': 'yearly',
+    'never': 'never',
+}
 
 
 class Form(forms.BaseForm):
