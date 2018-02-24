@@ -10,7 +10,7 @@ from djangocms_page_sitemap.settings import PAGE_SITEMAP_CHANGEFREQ_LIST
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cms', '__latest__'),
+        ('cms', '__first__'),
     ]
 
     operations = [
