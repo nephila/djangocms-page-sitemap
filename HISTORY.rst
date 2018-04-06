@@ -3,6 +3,11 @@
 History
 -------
 
+0.5.2 (unreleased)
+++++++++++++++++++
+
+* Make robots_extra not required
+
 0.5.1 (2018-02-27)
 ++++++++++++++++++
 

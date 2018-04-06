@@ -18,11 +18,14 @@ from .utils import get_cache_key
 @extension_pool.register
 @python_2_unicode_compatible
 class PageSitemapProperties(PageExtension):
-    changefreq = models.CharField(_('Change frequency'), max_length=20, default='monthly',
-                                  choices=PAGE_SITEMAP_CHANGEFREQ_LIST.items())
-    priority = models.DecimalField(_('Priority'), decimal_places=1,
-                                   max_digits=2, default=0.5,
-                                   validators=[MinValueValidator(0), MaxValueValidator(1)])
+    changefreq = models.CharField(
+        _('Change frequency'), max_length=20, default='monthly',
+        choices=PAGE_SITEMAP_CHANGEFREQ_LIST.items()
+    )
+    priority = models.DecimalField(
+        _('Priority'), decimal_places=1, max_digits=2, default=0.5,
+        validators=[MinValueValidator(0), MaxValueValidator(1)]
+    )
     include_in_sitemap = models.BooleanField(_('Include in sitemap'), default=True)
     noindex = models.BooleanField(
         _('Mark as no index'), default=False,
@@ -33,7 +36,7 @@ class PageSitemapProperties(PageExtension):
         help_text=_('Add meta tag robots with value noarchive')
     )
     robots_extra = models.CharField(
-        _('Extra robots value'), default='', max_length=200,
+        _('Extra robots value'), default='', max_length=200, blank=True,
         help_text=_('Extra values for robots meta tag')
     )
 
