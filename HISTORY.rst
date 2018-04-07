@@ -3,7 +3,7 @@
 History
 -------
 
-0.5.2 (unreleased)
+0.5.2 (2018-04-07)
 ++++++++++++++++++
 
 * Make robots_extra not required
