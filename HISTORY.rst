@@ -6,7 +6,7 @@ History
 0.5.2 (unreleased)
 ++++++++++++++++++
 
-* placeholder
+* Apply workaround to avoid triggering ``Page.site_id`` deprecation warning
 
 0.5.2 (2018-04-07)
 ++++++++++++++++++
