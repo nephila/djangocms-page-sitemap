@@ -38,7 +38,11 @@ class PageSitemapPropertiesMeta(CMSToolbar):
             self.request.current_page.has_change_permission(self.request.user)
         )
         if has_global_current_page_change_permission or can_change:
-            not_edit_mode = not self.toolbar.edit_mode
+            try:
+                # cms 3.4.5 compat
+                not_edit_mode = not self.toolbar.edit_mode
+            except AttributeError:
+                not_edit_mode = not self.toolbar.edit_mode_active
             current_page_menu = self.toolbar.get_or_create_menu('page')
             position = current_page_menu.find_first(
                 Break, identifier=PAGE_MENU_THIRD_BREAK) - 1
