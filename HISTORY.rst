@@ -6,7 +6,8 @@ History
 0.6.0 (unreleased)
 ++++++++++++++++++
 
-* placeholder
+* Drop compatibility with Django < 1.11
+* Drop compatibility with Python 3 < 3.5
 
 0.5.3 (2019-03-09)
 ++++++++++++++++++
