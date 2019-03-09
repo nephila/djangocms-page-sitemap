@@ -12,3 +12,4 @@ Contributors
 
 * Anton Egorov
 * carderm
+* Jeroen Peters
