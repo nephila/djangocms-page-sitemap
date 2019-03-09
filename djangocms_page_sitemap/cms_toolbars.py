@@ -8,15 +8,10 @@ from cms.toolbar_base import CMSToolbar
 from cms.toolbar_pool import toolbar_pool
 from cms.utils.conf import get_cms_setting
 from cms.utils.permissions import has_page_permission
+from django.urls import NoReverseMatch, reverse
 from django.utils.translation import ugettext_lazy as _
 
 from .models import PageSitemapProperties
-
-try:
-    from django.urls import reverse, NoReverseMatch
-except ImportError:
-    from django.core.urlresolvers import reverse, NoReverseMatch
-
 
 PAGE_SITEMAP_MENU_TITLE = _('Sitemap properties')
 
