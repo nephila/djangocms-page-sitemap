@@ -6,6 +6,8 @@ History
 0.5.2 (unreleased)
 ++++++++++++++++++
 
+* Add Django 2.0, 2.1 support
+* Add django CMS 3.6 support
 * Apply workaround to avoid triggering ``Page.site_id`` deprecation warning
 
 0.5.2 (2018-04-07)

@@ -3,7 +3,6 @@ from __future__ import absolute_import, print_function, unicode_literals
 
 from cms.toolbar.items import Menu, ModalItem
 from django.contrib.auth.models import Permission, User
-from django.core.urlresolvers import reverse
 from django.test.utils import override_settings
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
@@ -13,6 +12,13 @@ from djangocms_page_sitemap.cms_toolbars import PAGE_SITEMAP_MENU_TITLE
 from djangocms_page_sitemap.models import PageSitemapProperties
 
 from .base import BaseTest
+
+try:
+    from django.urls import reverse
+except ImportError:
+    from django.core.urlresolvers import reverse
+
+
 
 
 class ToolbarTest(BaseTest):
