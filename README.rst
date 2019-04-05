@@ -78,6 +78,17 @@ Quickstart
         url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': {'cmspages': ExtendedSitemap}}),
     )
 
+* Add the following snippets to the django CMS templates::
+
+    {% load robots_index %}
+
+     ...
+    <head>
+    <!-- somewhere in the head tag -->
+    {% page_robots %}
+    </head>
+    ...
+
 Usage
 -----
 
@@ -85,9 +96,30 @@ After installing as above, you will be able to tune the sitemap setting for each
 
 A new menu item ``Sitemap properties`` will be available in the page toolbar.
 
+For each page you will be able to set the following flags / values:
+
+* Sitemap changefreq (default: the django CMS default)
+* Sitemap priority (default: 0.5)
+* Include page in sitemap (default: `True`)
+* Set `noindex` value to page robots meta tag
+* Set `noarchite` value to page robots meta tag
+* Provide any additional robots meta tag values
+
+ page_robots options
+###################
+
+`page_robots` meta tag accepts the following parameters:
+
+* `page`: the page to render robots meta tag (default: current page). Can be
+  any valid `page lookup`_
+* `site`: the current site id (default: current site).
+
 Settings
 --------
 
 * PAGE_SITEMAP_CHANGEFREQ_LIST: List of frequency changes
 * PAGE_SITEMAP_DEFAULT_CHANGEFREQ: Default changefrequency (default: django CMS value -monthly-)
 * PAGE_SITEMAP_CACHE_DURATION: Cache duration: same as django CMS menu cache)
+
+
+.. _page lookup: https://docs.django-cms.org/en/reference/templatetags.html#page_lookup
