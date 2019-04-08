@@ -3,6 +3,11 @@
 History
 -------
 
+0.4.2
+++++++++++++++++++
+
+* Add support for noindex, noarchive robots meta tag
+
 0.4.1 (2016-12-02)
 ++++++++++++++++++
 
