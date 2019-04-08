@@ -3,7 +3,7 @@
 History
 -------
 
-0.4.2
+0.4.2 (2019-04-08)
 ++++++++++++++++++
 
 * Add support for noindex, noarchive robots meta tag
