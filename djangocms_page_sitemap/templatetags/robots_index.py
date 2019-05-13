@@ -24,10 +24,15 @@ class PageRobots(Tag):
 
     def render_tag(self, context, page, site_id):
         request = context.get('request')
+        if not request:
+            return ''
         if not site_id:
             site_id = get_current_site(request).pk
         if not page:
-            page = request.current_page
+            try:
+                page = request.current_page
+            except AttributeError:
+                pass
         else:
             page = _get_page_by_untyped_arg(page, request, site_id)
         content = []
