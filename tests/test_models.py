@@ -21,6 +21,11 @@ class RobotsTest(BaseTest):
         for key, value in context.items():
             self.assertEqual(ctx_obj.get(key), value)
 
+    def test_robots_tag_no_request(self):
+        template = '{% load robots_index %}{% page_robots %}'
+        context = {}
+        self._test_robots_tag(template, context, '')
+
     def test_robots_options(self):
         page1, page2, page3 = self.get_pages()
         extension = PageSitemapProperties.objects.create(
