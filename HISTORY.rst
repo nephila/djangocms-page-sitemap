@@ -3,6 +3,12 @@
 History
 -------
 
+0.5.4 (unreleased)
+++++++++++++++++++
+
+* Fix error when page_robots is executed outside a request
+* Fix tox for older environments
+
 0.5.3 (2019-03-09)
 ++++++++++++++++++
 
