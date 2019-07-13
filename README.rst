@@ -100,19 +100,19 @@ For each page you will be able to set the following flags / values:
 
 * Sitemap changefreq (default: the django CMS default)
 * Sitemap priority (default: 0.5)
-* Include page in sitemap (default: `True`)
-* Set `noindex` value to page robots meta tag
-* Set `noarchite` value to page robots meta tag
+* Include page in sitemap (default: ``True``)
+* Set ``noindex`` value to page robots meta tag
+* Set ``noarchite`` value to page robots meta tag
 * Provide any additional robots meta tag values
 
- page_robots options
+page_robots options
 ###################
 
-`page_robots` meta tag accepts the following parameters:
+``page_robots`` meta tag accepts the following parameters:
 
-* `page`: the page to render robots meta tag (default: current page). Can be
+* ``page``: the page to render robots meta tag (default: current page). Can be
   any valid `page lookup`_
-* `site`: the current site id (default: current site).
+* ``site``: the current site id (default: current site).
 
 Settings
 --------
