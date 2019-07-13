@@ -34,6 +34,17 @@ History
 * Package as Divio Cloud addon
 * Add support for noindex, noarchive robots meta tag
 
+0.4.3 (2019-07-13)
+++++++++++++++++++
+
+* Fix error when page_robots is executed outside a request
+* Fix tox for older environments
+
+0.4.2 (2019-04-08)
+++++++++++++++++++
+
+* Add support for noindex, noarchive robots meta tag
+
 0.4.1 (2016-12-02)
 ++++++++++++++++++
 
