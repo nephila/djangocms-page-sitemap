@@ -8,7 +8,6 @@ from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.static import serve
-from djangocms_helper.utils import DJANGO_1_11
 
 from djangocms_page_sitemap import sitemap_urls
 
@@ -24,13 +23,7 @@ urlpatterns = [
 
 urlpatterns += staticfiles_urlpatterns()
 
-if not DJANGO_1_11:
-    urlpatterns += i18n_patterns(
-        url(r'^admin/', admin.site.urls),
-        url(r'^', include('cms.urls')),
-    )
-else:
-    urlpatterns += i18n_patterns(
-        url(r'^admin/', include(admin.site.urls)),
-        url(r'^', include('cms.urls')),
-    )
+urlpatterns += i18n_patterns(
+    url(r'^admin/', admin.site.urls),
+    url(r'^', include('cms.urls')),
+)

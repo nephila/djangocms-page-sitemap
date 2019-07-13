@@ -8,15 +8,17 @@ django CMS page extension to handle sitemap customization
 
 Support Python version:
 
-* Python 2.7, 3.4, 3.5, 3.6
+* Python 2.7, 3.5, 3.6
 
 Supported Django versions:
 
-* Django 1.8 to 1.11
+* Django 1.11 to 2.1
 
 Supported django CMS versions:
 
 * django CMS 3.4+
+
+.. note:: djangocms-page-sitemap 0.6 dropped compatibility with Django < 1.11 and python 3.4. 0.5.x releases will be made if necessary after 0.6 release.
 
 
 Features
@@ -88,6 +90,17 @@ Quickstart
     )
 
 
+* Add the following snippets to the django CMS templates::
+
+    {% load robots_index %}
+
+     ...
+    <head>
+    <!-- somewhere in the head tag -->
+    {% page_robots %}
+    </head>
+    ...
+
 Usage
 -----
 
@@ -99,19 +112,19 @@ For each page you will be able to set the following flags / values:
 
 * Sitemap changefreq (default: the django CMS default)
 * Sitemap priority (default: 0.5)
-* Include page in sitemap (default: `True`)
-* Set `noindex` value to page robots meta tag
-* Set `noarchite` value to page robots meta tag
+* Include page in sitemap (default: ``True``)
+* Set ``noindex`` value to page robots meta tag
+* Set ``noarchite`` value to page robots meta tag
 * Provide any additional robots meta tag values
 
 page_robots options
-###################
+-------------------
 
-`page_robots` meta tag accepts the following parameters:
+``page_robots`` meta tag accepts the following parameters:
 
-* `page`: the page to render robots meta tag (default: current page). Can be
+* ``page``: the page to render robots meta tag (default: current page). Can be
   any valid `page lookup`_
-* `site`: the current site id (default: current site).
+* ``site``: the current site id (default: current site).
 
 Settings
 --------

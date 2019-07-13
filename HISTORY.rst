@@ -3,6 +3,18 @@
 History
 -------
 
+0.6.0 (2019-07-13)
+++++++++++++++++++
+
+* Drop compatibility with Django < 1.11
+* Drop compatibility with Python 3 < 3.5
+
+0.5.4 (2019-07-13)
+++++++++++++++++++
+
+* Fix error when page_robots is executed outside a request
+* Fix tox for older environments
+
 0.5.3 (2019-03-09)
 ++++++++++++++++++
 
@@ -26,6 +38,17 @@ History
 * Add Django 1.11 support
 * Add django CMS 3.5 support
 * Package as Divio Cloud addon
+* Add support for noindex, noarchive robots meta tag
+
+0.4.3 (2019-07-13)
+++++++++++++++++++
+
+* Fix error when page_robots is executed outside a request
+* Fix tox for older environments
+
+0.4.2 (2019-04-08)
+++++++++++++++++++
+
 * Add support for noindex, noarchive robots meta tag
 
 0.4.1 (2016-12-02)
