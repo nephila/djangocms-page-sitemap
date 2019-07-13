@@ -3,7 +3,7 @@
 History
 -------
 
-0.5.4 (unreleased)
+0.5.4 (2019-07-13)
 ++++++++++++++++++
 
 * Fix error when page_robots is executed outside a request
