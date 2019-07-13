@@ -106,7 +106,7 @@ For each page you will be able to set the following flags / values:
 * Provide any additional robots meta tag values
 
 page_robots options
-###################
+-------------------
 
 ``page_robots`` meta tag accepts the following parameters:
 
