@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, print_function, unicode_literals
 
+import sys
+
 
 def gettext(s):
     return s
@@ -58,8 +60,18 @@ HELPER_SETTINGS = {
 
 
 def run():
-    from djangocms_helper import runner
+    from app_helper import runner
     runner.cms('djangocms_page_sitemap')
+
+
+def setup():
+    from app_helper import runner
+    runner.setup('djangocms_page_sitemap', sys.modules[__name__], use_cms=True)
+
 
 if __name__ == '__main__':
     run()
+
+if __name__ == 'cms_helper':
+    # this is needed to run cms_helper in pycharm
+    setup()

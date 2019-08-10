@@ -7,7 +7,6 @@ from django.test.utils import override_settings
 from django.urls import reverse
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
-from djangocms_helper.utils import CMS_34
 
 from djangocms_page_sitemap.cms_toolbars import PAGE_SITEMAP_MENU_TITLE
 from djangocms_page_sitemap.models import PageSitemapProperties
@@ -39,10 +38,7 @@ class ToolbarTest(BaseTest):
         toolbar.get_left_items()
         page_menu = toolbar.find_items(Menu, name='Page')
 
-        if CMS_34:
-            self.assertEqual(len(page_menu), 0)
-        else:
-            self.assertEqual(len(page_menu), 1)
+        self.assertEqual(len(page_menu), 1)
 
     def test_perm(self):
         """
@@ -78,10 +74,7 @@ class ToolbarTest(BaseTest):
         toolbar = CMSToolbar(request)
         toolbar.get_left_items()
         page_menu = toolbar.find_items(Menu, name='Page')
-        if CMS_34:
-            self.assertEqual(len(page_menu), 0)
-        else:
-            self.assertEqual(len(page_menu), 1)
+        self.assertEqual(len(page_menu), 1)
 
     def test_toolbar(self):
         """
