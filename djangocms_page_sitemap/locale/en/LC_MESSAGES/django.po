@@ -1,67 +1,91 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: djangocms-page-sitemap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-18 16:10+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2019-08-11 22:56+0200\n"
+"PO-Revision-Date: 2018-02-07 20:51+0000\n"
+"Last-Translator: yakky <i.spalletti@nephila.it>\n"
+"Language-Team: English (http://www.transifex.com/nephila/djangocms-page-sitemap/language/en/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cms_toolbar.py:19
+#: cms_toolbars.py:16
 msgid "Sitemap properties"
-msgstr ""
-
-#: models.py:20
-msgid "Change frequency"
-msgstr ""
+msgstr "Sitemap properties"
 
 #: models.py:22
+msgid "Change frequency"
+msgstr "Change frequency"
+
+#: models.py:26
 msgid "Priority"
-msgstr ""
+msgstr "Priority"
 
-#: models.py:25
+#: models.py:29
 msgid "Include in sitemap"
-msgstr ""
+msgstr "Include in sitemap"
 
-#: models.py:28
+#: models.py:31
+msgid "Mark as no index"
+msgstr "Mark as no index"
+
+#: models.py:32
+msgid "Add meta tag robots with value noindex"
+msgstr "Add meta tag robots with value noindex"
+
+#: models.py:35
+msgid "Mark as no archive"
+msgstr "Mark as no archive"
+
+#: models.py:36
+msgid "Add meta tag robots with value noarchive"
+msgstr "Add meta tag robots with value noarchive"
+
+#: models.py:39
+msgid "Extra robots value"
+msgstr "Extra robots value"
+
+#: models.py:40
+msgid "Extra values for robots meta tag"
+msgstr "Extra values for robots meta tag"
+
+#: models.py:44
 #, python-format
 msgid "Sitemap values for Page %s"
-msgstr ""
+msgstr "Sitemap values for Page %s"
 
 #: settings.py:10
 msgid "always"
-msgstr ""
+msgstr "always"
 
 #: settings.py:11
 msgid "hourly"
-msgstr ""
+msgstr "hourly"
 
 #: settings.py:12
 msgid "daily"
-msgstr ""
+msgstr "daily"
 
 #: settings.py:13
 msgid "weekly"
-msgstr ""
+msgstr "weekly"
 
 #: settings.py:14
 msgid "monthly"
-msgstr ""
+msgstr "monthly"
 
 #: settings.py:15
 msgid "yearly"
-msgstr ""
+msgstr "yearly"
 
 #: settings.py:16
 msgid "never"
-msgstr ""
+msgstr "never"
