@@ -1,4 +1,4 @@
-coverage<5.0
+coverage<6.0
 coveralls
 flake8>=2.1.0
 tox>=2.0
