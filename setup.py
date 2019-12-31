@@ -38,7 +38,7 @@ setup(
     install_requires=[
         'django-cms>=3.6',
     ],
-    license='GPLv2+',
+    license='BSD',
     zip_safe=False,
     keywords='djangocms-page-sitemap',
     test_suite='cms_helper.run',
@@ -46,7 +46,7 @@ setup(
         'Development Status :: 5 - Production/Stable',
         'Framework :: Django',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)',
+        'License :: OSI Approved :: BSD License',
         'Natural Language :: English',
         'Framework :: Django',
         'Framework :: Django :: 1.11',
