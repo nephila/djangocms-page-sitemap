@@ -18,6 +18,8 @@ Supported django CMS versions:
 
 * django CMS 3.6+
 
+.. note:: djangocms-page-sitemap 0.8 has been relicensed with BSD license.
+
 .. note:: djangocms-page-sitemap 0.7 dropped compatibility with django CMS < 3.6. 0.6.x releases will be made if necessary after 0.6 release.
 
 
