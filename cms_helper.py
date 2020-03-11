@@ -5,6 +5,14 @@ from __future__ import absolute_import, print_function, unicode_literals
 import sys
 
 
+class DisableMigrations(object):
+    def __contains__(self, item):
+        return True
+
+    def __getitem__(self, item):
+        return None
+
+
 def gettext(s):
     return s
 
@@ -23,6 +31,7 @@ HELPER_SETTINGS = {
         'permissions': 10,
     },
     'ROOT_URLCONF': 'tests.test_utils.urls',
+    'MIGRATION_MODULES': DisableMigrations(),
     'INSTALLED_APPS': [
         'django.contrib.sitemaps',
     ],

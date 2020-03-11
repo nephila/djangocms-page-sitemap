@@ -65,17 +65,15 @@ class RobotsTest(BaseTest):
         extension = PageSitemapProperties.objects.create(
             extended_object=page1, priority='0.2', changefreq='never'
         )
-        page1.publish('en')
         extension.refresh_from_db()
 
         template = '{% load robots_index %}{% page_robots %}'
         expected = ''
-        context = {'request': self.get_page_request(page2.get_public_object(), AnonymousUser())}
+        context = {'request': self.get_page_request(page2, AnonymousUser())}
         self._test_robots_tag(template, context, expected)
 
         extension.noindex = True
         extension.save()
-        page1.publish('en')
         expected = ''
         self._test_robots_tag(template, context, expected)
 
@@ -85,13 +83,11 @@ class RobotsTest(BaseTest):
 
         extension.noarchive = True
         extension.save()
-        page1.publish('en')
         expected = '<meta name="robots" content="noindex,noarchive">'
         self._test_robots_tag(template, context, expected)
 
         extension.robots_extra = 'nodmoz'
         extension.save()
-        page1.publish('en')
         expected = '<meta name="robots" content="noindex,noarchive,nodmoz">'
         self._test_robots_tag(template, context, expected)
 
@@ -100,12 +96,11 @@ class RobotsTest(BaseTest):
         extension = PageSitemapProperties.objects.create(
             extended_object=page1, priority='0.2', changefreq='never'
         )
-        page1.publish('en')
         extension.refresh_from_db()
 
         template = '{% load robots_index %}{% page_robots None "abc" %}'
         expected = ''
-        context = {'request': self.get_page_request(page2.get_public_object(), AnonymousUser())}
+        context = {'request': self.get_page_request(page2, AnonymousUser())}
         self._test_robots_tag(template, context, expected)
 
     def test_robots_page_no_page(self):
@@ -113,12 +108,11 @@ class RobotsTest(BaseTest):
         extension = PageSitemapProperties.objects.create(
             extended_object=page1, priority='0.2', changefreq='never'
         )
-        page1.publish('en')
         extension.refresh_from_db()
 
         template = '{% load robots_index %}{% page_robots "abc" %}'
         expected = ''
-        context = {'request': self.get_page_request(page2.get_public_object(), AnonymousUser())}
+        context = {'request': self.get_page_request(page2, AnonymousUser())}
         self._test_robots_tag(template, context, expected)
 
     def test_robots_page_other_site(self):
@@ -127,10 +121,9 @@ class RobotsTest(BaseTest):
         extension = PageSitemapProperties.objects.create(
             extended_object=page1, priority='0.2', changefreq='never'
         )
-        page1.publish('en')
         extension.refresh_from_db()
 
         template = '{%% load robots_index %%}{%% page_robots None %s %%}' % site_2.pk
         expected = ''
-        context = {'request': self.get_page_request(page2.get_public_object(), AnonymousUser())}
+        context = {'request': self.get_page_request(page2, AnonymousUser())}
         self._test_robots_tag(template, context, expected)

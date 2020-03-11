@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, print_function, unicode_literals
 
+from cms.cms_toolbars import PlaceholderToolbar
 from cms.toolbar_pool import toolbar_pool
 from cms.utils.conf import get_cms_setting
 from cms.utils.permissions import has_page_permission
 from django.urls import NoReverseMatch, reverse
 from django.utils.translation import ugettext_lazy as _
-from cms.cms_toolbars import PlaceholderToolbar
 
 from .models import PageSitemapProperties
 

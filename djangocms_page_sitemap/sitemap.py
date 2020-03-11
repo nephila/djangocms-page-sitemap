@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, print_function, unicode_literals
 
-from cms.sitemaps import CMSSitemap
-from django.core.cache import cache
 from collections import defaultdict
+
+from cms.models import PageContent, PageUrl
+from cms.sitemaps import CMSSitemap
+from cms.utils import get_current_site
+from cms.utils.i18n import get_public_languages
+from django.core.cache import cache
 
 from .models import PageSitemapProperties
 from .settings import PAGE_SITEMAP_CACHE_DURATION, PAGE_SITEMAP_DEFAULT_CHANGEFREQ
 from .utils import get_cache_key
-
-from cms.models import PageContent, PageUrl
-from cms.utils import get_current_site
-from cms.utils.i18n import get_public_languages
 
 
 class ExtendedSitemap(CMSSitemap):
@@ -36,7 +36,11 @@ class ExtendedSitemap(CMSSitemap):
         excluded_translations = (
             PageContent
             .objects
-            .filter(language__in=languages, page__node__site=site, page__pagesitemapproperties__include_in_sitemap=False)
+            .filter(
+                language__in=languages,
+                page__node__site=site,
+                page__pagesitemapproperties__include_in_sitemap=False
+            )
             .values_list('page', 'language')
         )
 
