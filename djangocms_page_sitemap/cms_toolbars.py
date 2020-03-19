@@ -16,7 +16,6 @@ PAGE_SITEMAP_MENU_TITLE = _('Sitemap properties')
 @toolbar_pool.register
 class PageSitemapPropertiesMeta(PlaceholderToolbar):
     def populate(self):
-        # always use draft if we have a page
         self.page = self.request.current_page
         if not self.page:
             # Nothing to do

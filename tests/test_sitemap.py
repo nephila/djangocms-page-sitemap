@@ -69,3 +69,4 @@ class SitemapTest(BaseTest):
         ext_key = get_cache_key(page3)
         page3.delete()
         self.assertEqual(cache.get(ext_key), None)
+        
