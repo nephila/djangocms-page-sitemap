@@ -3,7 +3,7 @@ from __future__ import absolute_import, print_function, unicode_literals
 
 from cms.extensions import PageExtension, extension_pool
 from cms.models import Page
-from django.utils.six import python_2_unicode_compatible
+from six import python_2_unicode_compatible
 from django.core.cache import cache
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
