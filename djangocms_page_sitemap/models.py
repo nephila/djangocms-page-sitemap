@@ -3,13 +3,13 @@ from __future__ import absolute_import, print_function, unicode_literals
 
 from cms.extensions import PageExtension, extension_pool
 from cms.models import Page
-from six import python_2_unicode_compatible
 from django.core.cache import cache
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
+from six import python_2_unicode_compatible
 
 from .settings import PAGE_SITEMAP_CHANGEFREQ_LIST
 from .utils import get_cache_key
