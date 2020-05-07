@@ -31,6 +31,8 @@ HELPER_SETTINGS = {
         'permissions': 10,
     },
     'ROOT_URLCONF': 'tests.test_utils.urls',
+    # FIXME: Django CMS migrtions with Django 2.2 produce an error when
+    # running tests, temporarily disabling migrations
     'MIGRATION_MODULES': DisableMigrations(),
     'INSTALLED_APPS': [
         'django.contrib.sitemaps',
