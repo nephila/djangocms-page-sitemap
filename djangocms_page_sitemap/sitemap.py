@@ -19,7 +19,7 @@ class ExtendedSitemap(CMSSitemap):
     default_priority = CMSSitemap.priority
 
     def items(self):
-        # This method was created from this commit:
+        # FIXME:This method was created from this commit:
         # https://github.com/divio/django-cms/blob/2894ae8bcf92092d947a097499c01ab2bbb0e6df/cms/sitemaps/cms_sitemap.py
         site = get_current_site()
         languages = get_public_languages(site_id=site.pk)
