@@ -12,11 +12,9 @@ env:
   - TOXENV='pep8'
   - TOXENV='isort'
   - TOXENV='docs'
-  - DJANGO='django22' CMS='cms37'
-  - DJANGO='django21' CMS='cms37'
-  - DJANGO='django21' CMS='cms36'
-  - DJANGO='django111' CMS='cms37'
-  - DJANGO='django111' CMS='cms36'
+  - DJANGO='django111' CMS='cms40' FE=1
+  - DJANGO='django21' CMS='cms40' FE=1
+  - DJANGO='django22' CMS='cms40' FE=1
 
 
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
@@ -57,10 +55,7 @@ matrix:
     env: TOXENV='isort'
   - python: 3.6
     env: TOXENV='docs'
-
   - python: 2.7
-    env: DJANGO='django22' CMS='cms37'
+    env: DJANGO='django22' CMS='cms40' FE=1
   - python: 2.7
-    env: DJANGO='django21' CMS='cms37'
-  - python: 2.7
-    env: DJANGO='django21' CMS='cms36'
+    env: DJANGO='django21' CMS='cms40' FE=1

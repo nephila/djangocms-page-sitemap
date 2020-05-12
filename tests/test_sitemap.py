@@ -27,7 +27,6 @@ class SitemapTest(BaseTest):
         PageSitemapProperties.objects.create(
             extended_object=page1, priority='0.2', changefreq='never'
         )
-        page1.publish('it')
         sitemap = self.client.get('/sitemap.xml')
         self.assertContains(sitemap, test_string)
 
@@ -38,10 +37,7 @@ class SitemapTest(BaseTest):
         )
         sitemap = ExtendedSitemap()
         # unpublished since change, still in the sitemap
-        self.assertEqual(len(sitemap.items()), 6)
-
-        page3.publish('en')
-        page3.publish('fr')
+        self.assertEqual(len(sitemap.items()), 4)
         sitemap = ExtendedSitemap()
         # published, then no longer in the sitemap
         self.assertEqual(len(sitemap.items()), 4)
@@ -54,10 +50,6 @@ class SitemapTest(BaseTest):
         PageSitemapProperties.objects.create(
             extended_object=page3, priority='0.8', changefreq='hourly'
         )
-        page1.publish('fr')
-        page1 = page1.get_public_object()
-        page3.publish('fr')
-        page3 = page3.get_public_object()
         sitemap = ExtendedSitemap()
         self.assertEqual(len(sitemap.items()), 6)
         for item in sitemap.items():
@@ -77,3 +69,4 @@ class SitemapTest(BaseTest):
         ext_key = get_cache_key(page3)
         page3.delete()
         self.assertEqual(cache.get(ext_key), None)
+        
