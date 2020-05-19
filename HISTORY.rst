@@ -4,7 +4,7 @@ History
 -------
 
 
-0.9.0 (2020-05-15)
+0.9.0 (unreleased)
 ++++++++++++++++++
 
 * Port to django CMS 4.0
