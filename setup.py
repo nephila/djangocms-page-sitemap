@@ -36,7 +36,7 @@ setup(
     ],
     include_package_data=True,
     install_requires=[
-        'django-cms>=4.0.0a1',
+        'django-cms',
     ],
     license='BSD',
     zip_safe=False,
