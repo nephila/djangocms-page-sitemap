@@ -2,7 +2,6 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
 from decimal import Decimal
-
 from unittest import skipIf
 
 from django.core.cache import cache
