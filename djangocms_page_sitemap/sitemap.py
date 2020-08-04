@@ -11,7 +11,7 @@ from django.core.cache import cache
 
 from .models import PageSitemapProperties
 from .settings import PAGE_SITEMAP_CACHE_DURATION, PAGE_SITEMAP_DEFAULT_CHANGEFREQ
-from .utils import get_cache_key
+from .utils import get_cache_key, is_versioning_enabled
 
 
 class ExtendedSitemap(CMSSitemap):
@@ -80,3 +80,20 @@ class ExtendedSitemap(CMSSitemap):
                 return title.page.pagesitemapproperties.changefreq
             except PageSitemapProperties.DoesNotExist:
                 return self.default_changefreq
+
+    def lastmod(self, page_url):
+        # if versionining is enabledcode below is Added to return the latest version modified
+        # date of the page. if versionining is disabled lastmod() returns the changed_date from page
+        if is_versioning_enabled():
+            site = get_current_site()
+            page_contents = PageContent.objects.filter(
+                page=page_url.page,
+                language=page_url.language,
+                page__node__site=site,
+            ).first()
+
+            if page_contents:
+                published_version = page_contents.versions.first()
+                return published_version.modified
+
+        return page_url.page.changed_date

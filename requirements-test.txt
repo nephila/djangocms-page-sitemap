@@ -3,3 +3,4 @@ coveralls
 flake8>=2.1.0
 tox>=2.0
 django-app-helper
+http://github.com/divio/djangocms-versioning/tarball/master#egg=djangocms-versioning-0.0.28

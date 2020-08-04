@@ -3,12 +3,14 @@ from __future__ import absolute_import, print_function, unicode_literals
 
 from decimal import Decimal
 
+from unittest import skipIf
+
 from django.core.cache import cache
 from django.utils.timezone import now
 
 from djangocms_page_sitemap.models import PageSitemapProperties
 from djangocms_page_sitemap.sitemap import ExtendedSitemap
-from djangocms_page_sitemap.utils import get_cache_key
+from djangocms_page_sitemap.utils import get_cache_key, is_versioning_enabled
 
 from .base import BaseTest
 
@@ -69,4 +71,18 @@ class SitemapTest(BaseTest):
         ext_key = get_cache_key(page3)
         page3.delete()
         self.assertEqual(cache.get(ext_key), None)
-        
+
+    @skipIf(not is_versioning_enabled(), 'Right now this feature wont work without versioning')
+    def test_pageurl_lastmod_with_cms4_versioning(self):
+        # Check the latest version modified date for the page is checked for lastmod()
+        # if versioning is enabled, Currenly test is skipped , as this may require changes in testsuite
+        from cms.api import create_page, create_title
+        page_1 = create_page('page-one', 'page.html', language='en', created_by=self.user)
+        page_content = create_title(title='page un', language='en', page=page_1, created_by=self.user)
+        last_modified_date = '<lastmod>%s</lastmod>' % (
+            page_content.get.versions.first().modified.strftime('%Y-%m-%d')
+        )
+        expected_string = '<url><loc>http://example.com%s</loc>%s<changefreq>monthly</changefreq><priority>0.5</priority></url>' % (page_1.get_absolute_url(language='en'), last_modified_date)
+        sitemap = self.client.get('/sitemap.xml')
+
+        self.assertContains(sitemap, expected_string)
