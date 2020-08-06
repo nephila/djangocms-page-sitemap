@@ -82,8 +82,8 @@ class ExtendedSitemap(CMSSitemap):
                 return self.default_changefreq
 
     def lastmod(self, page_url):
-        # if versionining is enabledcode below is Added to return the latest version modified
-        # date of the page. if versioning is disabled lastmod() returns the page changed_date
+        # if versioning is enabled we  return the latest version modified using the versioning
+        # modified date. if versioning is disabled we return the page changed_date
         if is_versioning_enabled():
             site = get_current_site()
             page_contents = PageContent.objects.filter(

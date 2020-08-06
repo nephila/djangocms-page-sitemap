@@ -71,7 +71,7 @@ class SitemapTest(BaseTest):
         page3.delete()
         self.assertEqual(cache.get(ext_key), None)
 
-    @skipIf(not is_versioning_enabled(), 'Right now this feature wont work without versioning')
+    @skipIf(not is_versioning_enabled(), 'This test can only run when versioning is installed')
     def test_pageurl_lastmod_with_cms4_versioning(self):
         # Check the latest version modified date for the page is checked for lastmod()
         # if versioning is enabled, Currenly test is skipped , as this may require changes in testsuite
