@@ -8,6 +8,7 @@ History
 ++++++++++++++++++
 
 * Port to django CMS 4.0
+* Fix djangocms-versioning integration
 
 0.8.0 (2020-01-12)
 ++++++++++++++++++
