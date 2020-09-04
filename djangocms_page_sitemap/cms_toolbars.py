@@ -10,11 +10,14 @@ from django.utils.translation import ugettext_lazy as _
 from .models import PageSitemapProperties
 from .utils import is_versioning_enabled
 
+# Handle versioned toolbar if it exists, otherwise just use the normal CMS toolbar
+from cms.cms_toolbars import PageToolbar
 if is_versioning_enabled:
     try:
         from djangocms_versioning.cms_toolbars import VersioningPageToolbar as PageToolbar
     except ImportError:
-        from cms.cms_toolbars import PageToolbar
+        pass
+
 
 PAGE_SITEMAP_MENU_TITLE = _('Sitemap properties')
 

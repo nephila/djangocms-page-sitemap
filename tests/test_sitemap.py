@@ -79,7 +79,7 @@ class SitemapTest(BaseTest):
         page_1 = create_page('page-one', 'page.html', language='en', created_by=self.user)
         page_content = create_title(title='page un', language='en', page=page_1, created_by=self.user)
         last_modified_date = '<lastmod>%s</lastmod>' % (
-            page_content.get.versions.first().modified.strftime('%Y-%m-%d')
+            page_content.versions.first().modified.strftime('%Y-%m-%d')
         )
         expected_string = '<url><loc>http://example.com%s</loc>%s<changefreq>monthly</changefreq><priority>0.5</priority></url>' % (page_1.get_absolute_url(language='en'), last_modified_date)
         sitemap = self.client.get('/sitemap.xml')

@@ -1,15 +1,20 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, print_function, unicode_literals
 
-from cms.toolbar.items import Menu, ModalItem
+from unittest import skipIf
+
 from django.contrib.auth.models import Permission, User
 from django.test.utils import override_settings
 from django.urls import reverse
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
 
+from cms.toolbar.items import Menu, ModalItem
+from cms.test_utils.testcases import CMSTestCase
+
 from djangocms_page_sitemap.cms_toolbars import PAGE_SITEMAP_MENU_TITLE
 from djangocms_page_sitemap.models import PageSitemapProperties
+from djangocms_page_sitemap.utils import is_versioning_enabled
 
 from .base import BaseTest
 
@@ -117,3 +122,44 @@ class ToolbarTest(BaseTest):
             )[0].item
         self.assertTrue(meta_menu.url.startswith(reverse('admin:djangocms_page_sitemap_pagesitemapproperties_change', args=(page_ext.pk,))))
         self.assertEqual(force_text(page_ext), force_text(_('Sitemap values for Page %s') % page1.pk))
+
+
+@skipIf(not is_versioning_enabled(), 'This test case can only run when versioning is installed')
+class VersioningToolbarTest(CMSTestCase):
+
+    @staticmethod
+    def find_toolbar_buttons(button_name, toolbar):
+        """
+        Taken from: from djangocms_versioning.test_utils.test_helpers import find_toolbar_buttons
+
+        CAVEAT: This test helper is not currently accesible due to the fact that it would then enforce
+        versioning test packages and factory boy on this test suite.
+        """
+        found = []
+        for button_list in toolbar.get_right_items():
+            found = found + [
+                button for button in button_list.buttons if button.name == button_name
+            ]
+        return found
+
+    def test_toolbar_with_items(self):
+        """
+        The toolbar exists when versioning is installed and doesn't affect the toolbar buttons
+        """
+        from cms.api import create_page, create_title
+        from cms.toolbar.utils import get_object_preview_url
+
+        user = self.get_superuser()
+        page_1 = create_page('page-one', 'page.html', language='en', created_by=user)
+        page_content = create_title(title='page un', language='en', page=page_1, created_by=user)
+        preview_endpoint = get_object_preview_url(page_content, language='en')
+
+        with self.login_user_context(self.get_superuser()):
+            response = self.client.post(preview_endpoint)
+
+        edit_button_list = self.find_toolbar_buttons("Edit", response.wsgi_request.toolbar)
+        create_button_list = self.find_toolbar_buttons("Create", response.wsgi_request.toolbar)
+
+        # Only one edit and create button should exist
+        self.assertEqual(len(edit_button_list), 1)
+        self.assertEqual(len(create_button_list), 1)
