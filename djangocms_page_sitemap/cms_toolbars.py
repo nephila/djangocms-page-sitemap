@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, print_function, unicode_literals
 
-from cms.cms_toolbars import PageToolbar
 from cms.toolbar_pool import toolbar_pool
 from cms.utils.conf import get_cms_setting
 from cms.utils.permissions import has_page_permission
@@ -15,7 +14,7 @@ if is_versioning_enabled:
     try:
         from djangocms_versioning.cms_toolbars import VersioningPageToolbar as PageToolbar
     except ImportError:
-        pass
+        from cms.cms_toolbars import PageToolbar
 
 PAGE_SITEMAP_MENU_TITLE = _('Sitemap properties')
 
