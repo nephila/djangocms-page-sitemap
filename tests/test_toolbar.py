@@ -154,8 +154,8 @@ class VersioningToolbarTest(CMSTestCase):
         with self.login_user_context(self.get_superuser()):
             response = self.client.post(preview_endpoint)
 
-        edit_button_list = self.find_toolbar_buttons("Edit", response.wsgi_request.toolbar)
-        create_button_list = self.find_toolbar_buttons("Create", response.wsgi_request.toolbar)
+        edit_button_list = find_toolbar_buttons("Edit", response.wsgi_request.toolbar)
+        create_button_list = find_toolbar_buttons("Create", response.wsgi_request.toolbar)
 
         # Only one edit and create button should exist
         self.assertEqual(len(edit_button_list), 1)
