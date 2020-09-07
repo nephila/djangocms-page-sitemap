@@ -148,7 +148,7 @@ class VersioningToolbarTest(CMSTestCase):
         """
         user = self.get_superuser()
         page_1 = create_page('page-one', 'page.html', language='en', created_by=user)
-        page_content = create_title(title='page un', language='en', page=page_1, created_by=user)
+        page_content = page_1.get_title_obj(language='en')
         preview_endpoint = get_object_preview_url(page_content, language='en')
 
         with self.login_user_context(self.get_superuser()):
