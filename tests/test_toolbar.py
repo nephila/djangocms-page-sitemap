@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, print_function, unicode_literals
 
+from cms.api import create_page
+from cms.test_utils.testcases import CMSTestCase
+from cms.toolbar.items import Menu, ModalItem
+from cms.toolbar.utils import get_object_preview_url
 from django.contrib.auth.models import Permission, User
 from django.test.utils import override_settings
 from django.urls import reverse
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
-
-from cms.api import create_page, create_title
-from cms.toolbar.items import Menu, ModalItem
-from cms.toolbar.utils import get_object_preview_url
-from cms.test_utils.testcases import CMSTestCase
 
 from djangocms_page_sitemap.cms_toolbars import PAGE_SITEMAP_MENU_TITLE
 from djangocms_page_sitemap.models import PageSitemapProperties
