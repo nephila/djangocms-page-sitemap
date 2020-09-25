@@ -29,12 +29,12 @@ class BaseTest(TestCase):
 
     def get_pages(self):
         from cms.api import create_page, create_title
-        page_1 = create_page('page one', 'page.html', language='en')
-        page_2 = create_page('page two', 'page.html', language='en')
-        page_3 = create_page('page three', 'page.html', language='en')
-        create_title(language='fr', title='page un', page=page_1)
-        create_title(language='it', title='pagina uno', page=page_1)
-        create_title(language='fr', title='page trois', page=page_3)
+        page_1 = create_page('page one', 'page.html', language='en', created_by=self.user)
+        page_2 = create_page('page two', 'page.html', language='en', created_by=self.user)
+        page_3 = create_page('page three', 'page.html', language='en', created_by=self.user)
+        create_title(language='fr', title='page un', page=page_1, created_by=self.user)
+        create_title(language='it', title='pagina uno', page=page_1, created_by=self.user)
+        create_title(language='fr', title='page trois', page=page_3, created_by=self.user)
         if hasattr(page_1, 'set_as_homepage'):
             page_1.set_as_homepage()
 

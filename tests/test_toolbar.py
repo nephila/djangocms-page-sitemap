@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, print_function, unicode_literals
 
+from cms.api import create_page
+from cms.test_utils.testcases import CMSTestCase
 from cms.toolbar.items import Menu, ModalItem
+from cms.toolbar.utils import get_object_preview_url
 from django.contrib.auth.models import Permission, User
 from django.test.utils import override_settings
 from django.urls import reverse
@@ -12,6 +15,21 @@ from djangocms_page_sitemap.cms_toolbars import PAGE_SITEMAP_MENU_TITLE
 from djangocms_page_sitemap.models import PageSitemapProperties
 
 from .base import BaseTest
+
+
+def find_toolbar_buttons(button_name, toolbar):
+    """
+    Taken from: from djangocms_versioning.test_utils.test_helpers import find_toolbar_buttons
+
+    CAVEAT: This test helper is not currently accesible due to the fact that it would then enforce
+    versioning test packages and factory boy on this test suite.
+    """
+    found = []
+    for button_list in toolbar.get_right_items():
+        found = found + [
+            button for button in button_list.buttons if button.name == button_name
+        ]
+    return found
 
 
 class ToolbarTest(BaseTest):
@@ -117,3 +135,27 @@ class ToolbarTest(BaseTest):
             )[0].item
         self.assertTrue(meta_menu.url.startswith(reverse('admin:djangocms_page_sitemap_pagesitemapproperties_change', args=(page_ext.pk,))))
         self.assertEqual(force_text(page_ext), force_text(_('Sitemap values for Page %s') % page1.pk))
+
+
+class VersioningToolbarTest(CMSTestCase):
+
+    def test_toolbar_buttons_are_not_duplicated(self):
+        """
+        The toolbar for djangocms-page-sitemap doesn't affect the toolbar buttons.
+
+        This test Can be ran with or without versioning and should return the same result!
+        """
+        user = self.get_superuser()
+        page_1 = create_page('page-one', 'page.html', language='en', created_by=user)
+        page_content = page_1.get_title_obj(language='en')
+        preview_endpoint = get_object_preview_url(page_content, language='en')
+
+        with self.login_user_context(self.get_superuser()):
+            response = self.client.post(preview_endpoint)
+
+        edit_button_list = find_toolbar_buttons("Edit", response.wsgi_request.toolbar)
+        create_button_list = find_toolbar_buttons("Create", response.wsgi_request.toolbar)
+
+        # Only one edit and create button should exist
+        self.assertEqual(len(edit_button_list), 1)
+        self.assertEqual(len(create_button_list), 1)

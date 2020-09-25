@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, print_function, unicode_literals
 
-from cms.cms_toolbars import PlaceholderToolbar
 from cms.toolbar_pool import toolbar_pool
 from cms.utils.conf import get_cms_setting
 from cms.utils.permissions import has_page_permission
@@ -10,11 +9,18 @@ from django.utils.translation import ugettext_lazy as _
 
 from .models import PageSitemapProperties
 
+# Handle versioned toolbar if it exists, otherwise just use the normal CMS toolbar
+try:
+    from djangocms_versioning.cms_toolbars import VersioningPageToolbar as PageToolbar
+except ImportError:
+    from cms.cms_toolbars import PageToolbar
+
+
 PAGE_SITEMAP_MENU_TITLE = _('Sitemap properties')
 
 
 @toolbar_pool.register
-class PageSitemapPropertiesMeta(PlaceholderToolbar):
+class PageSitemapPropertiesMeta(PageToolbar):
     def populate(self):
         self.page = self.request.current_page
         if not self.page:
@@ -34,11 +40,7 @@ class PageSitemapPropertiesMeta(PlaceholderToolbar):
             self.request.current_page.has_change_permission(self.request.user)
         )
         if has_global_current_page_change_permission or can_change:
-            try:
-                # cms 3.4.5 compat
-                not_edit_mode = not self.toolbar.edit_mode
-            except AttributeError:
-                not_edit_mode = not self.toolbar.edit_mode_active
+            not_edit_mode = not self.toolbar.edit_mode_active
             current_page_menu = self.toolbar.get_or_create_menu('page')
             # Page tags
             try:
