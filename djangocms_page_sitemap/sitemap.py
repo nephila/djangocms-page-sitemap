@@ -54,6 +54,15 @@ class ExtendedSitemap(CMSSitemap):
 
             if page_url.language in excluded:
                 continue
+            if is_versioning_enabled():
+                # render only published version of page contents.
+                page_content = PageContent.objects.filter(
+                    page=page_url.page,
+                    language=page_url.language,
+                    page__node__site=site,
+                ).first()
+                if not page_content:
+                    continue
             valid_urls.append(page_url)
         return valid_urls
 
