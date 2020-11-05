@@ -31,14 +31,13 @@ class ExtendedSitemap(CMSSitemap):
             .filter(language__in=languages, path__isnull=False, page__login_required=False)
             .order_by('page__node__path')
         )
+        page_content_queryset = PageContent.objects.filter(page__node__site=site)
         excluded_titles_by_page = defaultdict(set)
         # Added filter to add pages to excluded translation that have include_in_sitemap as False
         excluded_translations = (
-            PageContent
-            .objects
+            page_content_queryset
             .filter(
                 language__in=languages,
-                page__node__site=site,
                 page__pagesitemapproperties__include_in_sitemap=False
             )
             .values_list('page', 'language')
@@ -56,10 +55,9 @@ class ExtendedSitemap(CMSSitemap):
                 continue
             if is_versioning_enabled():
                 # render only published version of page contents.
-                page_content = PageContent.objects.filter(
+                page_content = page_content_queryset.filter(
                     page=page_url.page,
                     language=page_url.language,
-                    page__node__site=site,
                 ).first()
                 if not page_content:
                     continue
