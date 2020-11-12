@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import absolute_import, print_function, unicode_literals
-
 from cms.sitemaps import CMSSitemap
 from django.core.cache import cache
 
@@ -14,9 +11,7 @@ class ExtendedSitemap(CMSSitemap):
     default_priority = CMSSitemap.priority
 
     def items(self):
-        return super(ExtendedSitemap, self).items().exclude(
-            page__pagesitemapproperties__include_in_sitemap=False
-        )
+        return super().items().exclude(page__pagesitemapproperties__include_in_sitemap=False)
 
     def priority(self, title):
         ext_key = get_cache_key(title.page)
@@ -25,7 +20,11 @@ class ExtendedSitemap(CMSSitemap):
             return properties.priority
         else:
             try:
-                cache.set(ext_key, title.page.pagesitemapproperties, PAGE_SITEMAP_CACHE_DURATION)
+                cache.set(
+                    ext_key,
+                    title.page.pagesitemapproperties,
+                    PAGE_SITEMAP_CACHE_DURATION,
+                )
                 return title.page.pagesitemapproperties.priority
             except PageSitemapProperties.DoesNotExist:
                 return self.default_priority
@@ -37,7 +36,11 @@ class ExtendedSitemap(CMSSitemap):
             return properties.changefreq
         else:
             try:
-                cache.set(ext_key, title.page.pagesitemapproperties, PAGE_SITEMAP_CACHE_DURATION)
+                cache.set(
+                    ext_key,
+                    title.page.pagesitemapproperties,
+                    PAGE_SITEMAP_CACHE_DURATION,
+                )
                 return title.page.pagesitemapproperties.changefreq
             except PageSitemapProperties.DoesNotExist:
                 return self.default_changefreq

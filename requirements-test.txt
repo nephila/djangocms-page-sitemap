@@ -1,5 +1,7 @@
-coverage<5.0
+-r requirements.txt
+coverage
 coveralls
-flake8>=2.1.0
-tox>=2.0
+mock>=1.0.1
+flake8
+tox
 django-app-helper
