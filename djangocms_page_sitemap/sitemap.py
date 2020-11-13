@@ -7,6 +7,7 @@ from cms.models import PageContent, PageUrl
 from cms.sitemaps import CMSSitemap
 from cms.utils import get_current_site
 from cms.utils.i18n import get_public_languages
+from django.db.models import Prefetch
 from django.core.cache import cache
 
 from .models import PageSitemapProperties
@@ -23,19 +24,32 @@ class ExtendedSitemap(CMSSitemap):
         # https://github.com/divio/django-cms/blob/2894ae8bcf92092d947a097499c01ab2bbb0e6df/cms/sitemaps/cms_sitemap.py
         site = get_current_site()
         languages = get_public_languages(site_id=site.pk)
+        page_content_queryset = PageContent.objects.filter(
+            page__node__site=site,
+            language__in=languages
+        )
+        page_content_prefetch= Prefetch(
+            'page__pagecontent_set',
+            queryset=page_content_queryset
+        )
         all_urls = (
             PageUrl
-            .objects
-            .get_for_site(site)
-            .select_related('page')
-            .filter(language__in=languages, path__isnull=False, page__login_required=False)
-            .order_by('page__node__path')
+                .objects
+                .get_for_site(site)
+                .prefetch_related(page_content_prefetch)
+                .filter(
+                    language__in=languages,
+                    path__isnull=False,
+                    page__login_required=False
+                )
+                .order_by('page__node__path')
         )
-        page_content_queryset = PageContent.objects.filter(page__node__site=site)
+
         excluded_titles_by_page = defaultdict(set)
         # Added filter to add pages to excluded translation that have include_in_sitemap as False
         excluded_translations = (
-            page_content_queryset
+            PageContent
+            .objects
             .filter(
                 language__in=languages,
                 page__pagesitemapproperties__include_in_sitemap=False
@@ -53,14 +67,15 @@ class ExtendedSitemap(CMSSitemap):
 
             if page_url.language in excluded:
                 continue
-            if is_versioning_enabled():
-                # render only published version of page contents.
-                page_content = page_content_queryset.filter(
-                    page=page_url.page,
-                    language=page_url.language,
-                ).first()
-                if not page_content:
-                    continue
+
+            published_page_content = False
+            for page_content in page_url.page.pagecontent_set.all():
+                if page_url.language == page_content.language:
+                    published_page_content = True
+
+            if not published_page_content:
+                continue
+
             valid_urls.append(page_url)
         return valid_urls
 
