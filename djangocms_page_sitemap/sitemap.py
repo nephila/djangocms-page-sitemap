@@ -48,11 +48,8 @@ class ExtendedSitemap(CMSSitemap):
         excluded_titles_by_page = defaultdict(set)
         # Added filter to add pages to excluded translation that have include_in_sitemap as False
         excluded_translations = (
-            PageContent
-            .objects
+            page_content_queryset
             .filter(
-                language__in=languages,
-                page__node__site=site,
                 page__pagesitemapproperties__include_in_sitemap=False
             )
             .values_list('page', 'language')
