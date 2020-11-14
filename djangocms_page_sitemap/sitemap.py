@@ -7,8 +7,8 @@ from cms.models import PageContent, PageUrl
 from cms.sitemaps import CMSSitemap
 from cms.utils import get_current_site
 from cms.utils.i18n import get_public_languages
-from django.db.models import Prefetch
 from django.core.cache import cache
+from django.db.models import Prefetch
 
 from .models import PageSitemapProperties
 from .settings import PAGE_SITEMAP_CACHE_DURATION, PAGE_SITEMAP_DEFAULT_CHANGEFREQ
@@ -52,6 +52,7 @@ class ExtendedSitemap(CMSSitemap):
             .objects
             .filter(
                 language__in=languages,
+                page__node__site=site,
                 page__pagesitemapproperties__include_in_sitemap=False
             )
             .values_list('page', 'language')
