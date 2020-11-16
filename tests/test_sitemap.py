@@ -5,7 +5,6 @@ from decimal import Decimal
 from unittest import skipIf
 
 from cms.api import create_page, create_title
-
 from django.core.cache import cache
 from django.utils.timezone import now
 
@@ -32,7 +31,9 @@ class SitemapTest(BaseTest):
             page3_content.versions.first().publish(self.user)
 
         sitemap = self.client.get('/sitemap.xml')
-        test_string = '<url><loc>http://example.com/%s/</loc><lastmod>%s</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>' % (page1.get_title_obj().language,now().strftime('%Y-%m-%d'))
+        test_string = '<url><loc>http://example.com/%s/</loc><lastmod>%s</lastmod><changefreq>' \
+                      'monthly</changefreq><priority>0.5</priority></url>' \
+                      % (page1.get_title_obj().language, now().strftime('%Y-%m-%d'))
         self.assertContains(sitemap, test_string)
 
     def test_sitemap_extended(self):
@@ -51,7 +52,9 @@ class SitemapTest(BaseTest):
             page2_content.versions.first().publish(self.user)
             page3_content.versions.first().publish(self.user)
 
-        test_string = '<url><loc>http://example.com/%s/</loc><lastmod>%s</lastmod><changefreq>never</changefreq><priority>0.2</priority></url>' % (page1.get_title_obj().language,now().strftime('%Y-%m-%d'))
+        test_string = '<url><loc>http://example.com/%s/</loc><lastmod>%s</lastmod><changefreq>' \
+                      'never</changefreq><priority>0.2</priority></url>' \
+                      % (page1.get_title_obj().language, now().strftime('%Y-%m-%d'))
         sitemap = self.client.get('/sitemap.xml')
         self.assertContains(sitemap, test_string)
 
@@ -127,7 +130,9 @@ class SitemapTest(BaseTest):
         last_modified_date = '<lastmod>%s</lastmod>' % (
             page_content.versions.first().modified.strftime('%Y-%m-%d')
         )
-        expected_string = '<url><loc>http://example.com%s</loc>%s<changefreq>monthly</changefreq><priority>0.5</priority></url>' % (page_1.get_absolute_url(language='en'), last_modified_date)
+        expected_string = '<url><loc>http://example.com%s</loc>%s<changefreq>monthly</changefreq>' \
+                          '<priority>0.5</priority></url>' \
+                          % (page_1.get_absolute_url(language='en'), last_modified_date)
         sitemap = self.client.get('/sitemap.xml')
 
         self.assertContains(sitemap, expected_string)
