@@ -13,6 +13,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from djangocms_page_sitemap.cms_toolbars import PAGE_SITEMAP_MENU_TITLE
 from djangocms_page_sitemap.models import PageSitemapProperties
+from djangocms_page_sitemap.utils import is_versioning_enabled
+
 
 from .base import BaseTest
 
@@ -145,9 +147,14 @@ class VersioningToolbarTest(CMSTestCase):
 
         This test Can be ran with or without versioning and should return the same result!
         """
+        from cms.api import create_title
+
         user = self.get_superuser()
         page_1 = create_page('page-one', 'page.html', language='en', created_by=user)
-        page_content = page_1.get_title_obj(language='en')
+        page_content = create_title(title='pagecontent1', language='en', page=page_1,
+                                         created_by=user)
+        if is_versioning_enabled():
+            page_content.versions.first().publish(user)
         preview_endpoint = get_object_preview_url(page_content, language='en')
 
         with self.login_user_context(self.get_superuser()):
