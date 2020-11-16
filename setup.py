@@ -35,9 +35,6 @@ setup(
         'djangocms_page_sitemap',
     ],
     include_package_data=True,
-    install_requires=[
-        'django-cms>=4.0.0',
-    ],
     license='BSD',
     zip_safe=False,
     keywords='djangocms-page-sitemap',
@@ -59,5 +56,8 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+    ],
+    dependency_links=[
+        "http://github.com/divio/django-cms/tarball/release/4.0.x#egg=django-cms-4.0.0",
     ],
 )
