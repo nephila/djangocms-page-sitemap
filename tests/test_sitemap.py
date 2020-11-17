@@ -5,6 +5,7 @@ from decimal import Decimal
 from unittest import skipIf
 
 from cms.api import create_page, create_title
+from cms.test_utils.util.fuzzy_int import FuzzyInt
 from django.core.cache import cache
 from django.utils.timezone import now
 
@@ -60,8 +61,10 @@ class SitemapTest(BaseTest):
         PageSitemapProperties.objects.create(
             extended_object=page3, priority='0.8', changefreq='hourly'
         )
+
         sitemap = ExtendedSitemap()
         self.assertEqual(len(sitemap.items()), 6)
+
         for item in sitemap.items():
             if item.page.pk == page1.pk:
                 self.assertEqual(sitemap.changefreq(item), 'never')
@@ -102,3 +105,17 @@ class SitemapTest(BaseTest):
         sitemap = self.client.get('/sitemap.xml')
 
         self.assertContains(sitemap, expected_string)
+
+    def test_sitemap_items_query_performance(self):
+        page1, page2, page3 = self.get_pages()
+
+        PageSitemapProperties.objects.create(
+            extended_object=page1, priority='0.2', changefreq='never'
+        )
+        PageSitemapProperties.objects.create(
+            extended_object=page3, priority='0.8', changefreq='hourly'
+        )
+        sitemap = ExtendedSitemap()
+        max_queries = 4
+        with self.assertNumQueries(FuzzyInt(3, max_queries)):
+            self.assertEqual(len(sitemap.items()), 6)
