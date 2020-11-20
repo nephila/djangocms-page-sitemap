@@ -7,6 +7,8 @@ from django.http import SimpleCookie
 from django.test import RequestFactory, TestCase
 from django.utils.six import StringIO
 
+from djangocms_page_sitemap.utils import is_versioning_enabled
+
 
 class BaseTest(TestCase):
     """
@@ -35,6 +37,28 @@ class BaseTest(TestCase):
         create_title(language='fr', title='page un', page=page_1, created_by=self.user)
         create_title(language='it', title='pagina uno', page=page_1, created_by=self.user)
         create_title(language='fr', title='page trois', page=page_3, created_by=self.user)
+        page_content1 = create_title(
+            title='pagecontent1_en',
+            language='en',
+            page=page_1,
+            created_by=self.user
+        )
+        page_content2 = create_title(
+            title='pagecontent2_en',
+            language='en',
+            page=page_2,
+            created_by=self.user
+        )
+        page_content3 = create_title(
+            title='pagecontent3_en',
+            language='en',
+            page=page_3,
+            created_by=self.user
+        )
+        if is_versioning_enabled():
+            page_content1.versions.first().publish(self.user)
+            page_content2.versions.first().publish(self.user)
+            page_content3.versions.first().publish(self.user)
         if hasattr(page_1, 'set_as_homepage'):
             page_1.set_as_homepage()
 
