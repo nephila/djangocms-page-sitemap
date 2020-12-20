@@ -50,7 +50,7 @@ Quickstart
             "djangocms_page_sitemap",
         ]
 
-* Add to the urlconf, eventually removing django CMS sitemap:
+* Load it into the urlconf, eventually removing django CMS sitemap:
 
   .. code-block:: python
 
@@ -62,18 +62,18 @@ Quickstart
             ...
         ]
 
-* Add the following snippets to the django CMS templates:
+* Load ``robots_index`` templatetag and add it to the page in the head tag of the django CMS pages (or in a shared base template):
 
   .. code-block:: html+django
 
-      {% load robots_index %}
+        {% load robots_index %}
 
-      ...
-      <head>
-      <!-- somewhere in the head tag -->
-      {% page_robots %}
-      </head>
-       ...
+        ...
+        <head>
+        <!-- somewhere in the head tag -->
+        {% page_robots %}
+        </head>
+         ...
 
 * If you need to provide a custom sitemap configuration (for example to add more
   sitemap classes to it, you can append the sitemap url explicitly:
@@ -94,19 +94,6 @@ Quickstart
             ...
         ]
 
-
-* Add the following snippets to the django CMS templates:
-
-  .. code-block:: html+django
-
-        {% load robots_index %}
-
-         ...
-        <head>
-        <!-- somewhere in the head tag -->
-        {% page_robots %}
-        </head>
-        ...
 
 **************************
 django-app-enabler support
