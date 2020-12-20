@@ -46,8 +46,8 @@ Quickstart
 
         INSTALLED_APPS = [
             ...
-            'django.contrib.sitemaps',
-            'djangocms_page_sitemap',
+            "django.contrib.sitemaps",
+            "djangocms_page_sitemap",
         ]
 
 * Add to the urlconf, eventually removing django CMS sitemap:
@@ -56,9 +56,9 @@ Quickstart
 
         ...
         urlpatterns = [
-            path('admin/', admin.site.urls),
+            path("admin/", admin.site.urls),
             ...
-            path('', include("djangocms_page_sitemap.sitemap_urls')),
+            path("", include("djangocms_page_sitemap.sitemap_urls")),
             ...
         ]
 
@@ -86,9 +86,9 @@ Quickstart
 
         urlpatterns = [
             ...
-            path('sitemap.xml', sitemap, {
-                'sitemaps': {
-                    'cmspages': ExtendedSitemap, 'myapp': MySiteSitemap,
+            path("sitemap.xml", sitemap, {
+                "sitemaps": {
+                    "cmspages": ExtendedSitemap, "myapp": MySiteSitemap,
                 }
             ),
             ...
