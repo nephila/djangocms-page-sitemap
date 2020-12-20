@@ -54,14 +54,11 @@ Quickstart
 
   .. code-block:: python
 
-        from djangocms_page_sitemap import sitemap_urls
-
         ...
-
         urlpatterns = [
-            url(r'^admin/', include(admin.site.urls)),
+            path('admin/', admin.site.urls),
             ...
-            url(r'^', include(sitemap_urls)),
+            path('', include("djangocms_page_sitemap.sitemap_urls')),
             ...
         ]
 
@@ -87,16 +84,15 @@ Quickstart
         from djangocms_page_sitemap.sitemap import ExtendedSitemap
         from myapp.sitemaps import MySiteSitemap
 
-
-        urlpatterns = patterns(
-            '',
+        urlpatterns = [
             ...
-            url(r'^sitemap\.xml$', sitemap,
-                {'sitemaps': {
+            path('sitemap.xml', sitemap, {
+                'sitemaps': {
                     'cmspages': ExtendedSitemap, 'myapp': MySiteSitemap,
                 }
-            }),
-        )
+            ),
+            ...
+        ]
 
 
 * Add the following snippets to the django CMS templates:
