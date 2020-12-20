@@ -1,0 +1,12 @@
+{
+    "package-name": "djangocms-page-sitemap",
+    "installed-apps": [
+        "django.contrib.sitemaps",
+        "djangocms_page_sitemap"
+    ],
+    "settings": {},
+    "urls": [
+        ["", "djangocms_page_sitemap.sitemap_urls"]
+    ],
+    "message": "Installation completed, please setup your templates according to the documentation: https://djangocms-page-sitemap.readthedocs.io/en/latest/"
+}

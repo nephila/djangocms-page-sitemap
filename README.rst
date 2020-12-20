@@ -40,68 +40,96 @@ Quickstart
 
     pip install djangocms-page-sitemap
 
-* Add to ``INSTALLED_APPS`` with ``django.contrib.sitemaps``::
+* Add to ``INSTALLED_APPS`` with ``django.contrib.sitemaps``:
 
-    INSTALLED_APPS = [
+  .. code-block:: python
+
+        INSTALLED_APPS = [
+            ...
+            'django.contrib.sitemaps',
+            'djangocms_page_sitemap',
+        ]
+
+* Add to the urlconf, eventually removing django CMS sitemap:
+
+  .. code-block:: python
+
+        from djangocms_page_sitemap import sitemap_urls
+
         ...
-        'django.contrib.sitemaps',
-        'djangocms_page_sitemap',
-    ]
 
-* Add to the urlconf, eventually removing django CMS sitemap::
+        urlpatterns = [
+            url(r'^admin/', include(admin.site.urls)),
+            ...
+            url(r'^', include(sitemap_urls)),
+            ...
+        ]
 
+* Add the following snippets to the django CMS templates:
 
-    from djangocms_page_sitemap import sitemap_urls
+  .. code-block:: html+django
 
-    ...
+      {% load robots_index %}
 
-    urlpatterns = [
-        url(r'^admin/', include(admin.site.urls)),
-        ...
-        url(r'^', include(sitemap_urls)),
-        ...
-    ]
-
-* Add the following snippets to the django CMS templates::
-
-    {% load robots_index %}
-
-    ...
-    <head>
-    <!-- somewhere in the head tag -->
-    {% page_robots %}
-    </head>
-    ...
+      ...
+      <head>
+      <!-- somewhere in the head tag -->
+      {% page_robots %}
+      </head>
+       ...
 
 * If you need to provide a custom sitemap configuration (for example to add more
-  sitemap classes to it, you can append the sitemap url explicitly::
+  sitemap classes to it, you can append the sitemap url explicitly:
 
-    from django.contrib.sitemaps.views import sitemap
-    from djangocms_page_sitemap.sitemap import ExtendedSitemap
-    from myapp.sitemaps import MySiteSitemap
+  .. code-block:: python
+
+        from django.contrib.sitemaps.views import sitemap
+        from djangocms_page_sitemap.sitemap import ExtendedSitemap
+        from myapp.sitemaps import MySiteSitemap
 
 
-    urlpatterns = patterns(
-        '',
+        urlpatterns = patterns(
+            '',
+            ...
+            url(r'^sitemap\.xml$', sitemap,
+                {'sitemaps': {
+                    'cmspages': ExtendedSitemap, 'myapp': MySiteSitemap,
+                }
+            }),
+        )
+
+
+* Add the following snippets to the django CMS templates:
+
+  .. code-block:: html+django
+
+        {% load robots_index %}
+
+         ...
+        <head>
+        <!-- somewhere in the head tag -->
+        {% page_robots %}
+        </head>
         ...
-        url(r'^sitemap\.xml$', sitemap,
-            {'sitemaps': {
-                'cmspages': ExtendedSitemap, 'myapp': MySiteSitemap,
-            }
-        }),
-    )
 
+**************************
+django-app-enabler support
+**************************
 
-* Add the following snippets to the django CMS templates::
+`django-app-enabler`_ is supported.
 
-    {% load robots_index %}
+You can either
 
-     ...
-    <head>
-    <!-- somewhere in the head tag -->
-    {% page_robots %}
-    </head>
-    ...
+* Installation & configuration: ``python -mapp_enabler install djangocms-page-meta``
+* Autoconfiguration: ``python -mapp_enabler enable djangocms_page_meta``
+
+Fully using this package will require some changes that cannot be modified by ``django-app-enabler``:
+
+* Remove any existing sitemap declaration from ``urls.py``;
+* Load robots tags in the page like outlined above;
+* Run migrations: ``python manage.py migrate``
+
+Check documentation above for details.
 
 Usage
 -----
@@ -116,7 +144,7 @@ For each page you will be able to set the following flags / values:
 * Sitemap priority (default: 0.5)
 * Include page in sitemap (default: ``True``)
 * Set ``noindex`` value to page robots meta tag
-* Set ``noarchite`` value to page robots meta tag
+* Set ``noarchive`` value to page robots meta tag
 * Provide any additional robots meta tag values
 
 page_robots options
@@ -137,6 +165,7 @@ Settings
 
 
 .. _page lookup: https://docs.django-cms.org/en/reference/templatetags.html#page_lookup
+.. _django-app-enabler: https://github.com/nephila/django-app-enabler
 
 
 .. |Gitter| image:: https://img.shields.io/badge/GITTER-join%20chat-brightgreen.svg?style=flat-square
