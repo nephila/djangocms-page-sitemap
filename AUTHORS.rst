@@ -13,4 +13,6 @@ Contributors
 * Anton Egorov
 * carderm
 * Fabrice Pardo
+* fp4code
 * Jeroen Peters
+* Leonardo Cavallucci
