@@ -4,15 +4,21 @@
 History
 *******
 
-0.8.2 (unreleased)
+.. towncrier release notes start
+
+1.0.0 (2020-12-21)
 ==================
 
-* Nothing yet
+Features
+--------
+
+- Add support for django-app-enabler (#63)
+- Update tooling and drop Python 2 / Django < 2.2 compatibility (#10208)
 
 0.8.1 (2020-05-02)
 ==================
 
-* Relicense under BSD license
+* Enable django CMS 3.7.2 on python 3
 
 0.8.0 (2020-01-12)
 ==================

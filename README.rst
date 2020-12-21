@@ -23,8 +23,9 @@ Supported django CMS versions:
 .. note:: djangocms-page-sitemap 0.7 dropped compatibility with django CMS < 3.6. 0.6.x releases will be made if necessary after 0.6 release.
 
 
+********
 Features
---------
+********
 
 * Support for changefreq and priority customisation per-page
 * Option to exclude a page from the Sitemap
@@ -33,8 +34,9 @@ Features
 * Available on Divio Cloud
 
 
+**********
 Quickstart
-----------
+**********
 
 * Install djangocms-page-sitemap::
 
@@ -114,8 +116,9 @@ Fully using this package will require some changes that cannot be modified by ``
 
 Check documentation above for details.
 
+**********
 Usage
------
+**********
 
 After installing as above, you will be able to tune the sitemap setting for each page.
 
@@ -131,7 +134,7 @@ For each page you will be able to set the following flags / values:
 * Provide any additional robots meta tag values
 
 page_robots options
--------------------
+===================
 
 ``page_robots`` meta tag accepts the following parameters:
 
@@ -140,7 +143,7 @@ page_robots options
 * ``site``: the current site id (default: current site).
 
 Settings
---------
+===================
 
 * PAGE_SITEMAP_CHANGEFREQ_LIST: List of frequency changes
 * PAGE_SITEMAP_DEFAULT_CHANGEFREQ: Default changefrequency (default: django CMS value -monthly-)
