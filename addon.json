@@ -1,6 +1,1 @@
-{
-    "package-name": "djangocms-page-sitemap",
-    "installed-apps": [
-        "djangocms_page_sitemap"
-    ]
-}
+djangocms_page_sitemap/addon.json
