@@ -1,6 +1,3 @@
-
-from __future__ import absolute_import, print_function, unicode_literals
-
 from cms.toolbar_pool import toolbar_pool
 from cms.utils.conf import get_cms_setting
 from cms.utils.permissions import has_page_permission

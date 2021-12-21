@@ -1,11 +1,9 @@
-
-from __future__ import absolute_import, print_function, unicode_literals
+from io import StringIO
 
 from cms.utils.i18n import get_language_list
 from django.contrib.auth.models import User
 from django.http import SimpleCookie
 from django.test import RequestFactory, TestCase
-from django.utils.six import StringIO
 
 from djangocms_page_sitemap.utils import is_versioning_enabled
 

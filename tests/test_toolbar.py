@@ -1,6 +1,3 @@
-
-from __future__ import absolute_import, print_function, unicode_literals
-
 from cms.api import create_page
 from cms.test_utils.testcases import CMSTestCase
 from cms.toolbar.items import Menu, ModalItem

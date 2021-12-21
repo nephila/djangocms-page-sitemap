@@ -1,6 +1,3 @@
-
-from __future__ import absolute_import, print_function, unicode_literals
-
 from classytags.arguments import Argument
 from classytags.core import Options, Tag
 from cms.templatetags.cms_tags import _get_page_by_untyped_arg

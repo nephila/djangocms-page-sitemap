@@ -1,6 +1,3 @@
-
-from __future__ import unicode_literals
-
 import django.core.validators
 from django.db import models, migrations
 

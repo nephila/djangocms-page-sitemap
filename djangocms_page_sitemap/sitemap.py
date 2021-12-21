@@ -1,8 +1,3 @@
-
-from __future__ import absolute_import, print_function, unicode_literals
-
-from collections import defaultdict
-
 from cms.models import PageContent, PageUrl
 from cms.sitemaps import CMSSitemap
 from cms.utils import get_current_site

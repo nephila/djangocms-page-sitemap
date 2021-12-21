@@ -1,6 +1,3 @@
-
-from __future__ import absolute_import, print_function, unicode_literals
-
 from cms.extensions import PageExtension, extension_pool
 from cms.models import Page
 from cms.utils.compat.dj import python_2_unicode_compatible
