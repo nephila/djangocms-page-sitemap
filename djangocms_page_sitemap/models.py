@@ -1,6 +1,5 @@
 from cms.extensions import PageExtension, extension_pool
 from cms.models import Page
-from cms.utils.compat.dj import python_2_unicode_compatible
 from django.core.cache import cache
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
@@ -13,7 +12,6 @@ from .utils import get_cache_key
 
 
 @extension_pool.register
-@python_2_unicode_compatible
 class PageSitemapProperties(PageExtension):
     changefreq = models.CharField(
         _('Change frequency'), max_length=20, default='monthly',
