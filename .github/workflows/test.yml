@@ -8,12 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8, 3.7, 3.6]
-        django: [31, 30, 22]
-        cms: [38, 37]
-        exclude:
-          - django: 31
-            cms: 37
+        python-version: [39, 38, 37]
+        django: [32, 22]
+        cms: [40]
+
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
