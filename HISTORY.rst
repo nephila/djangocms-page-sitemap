@@ -6,19 +6,16 @@ History
 
 .. towncrier release notes start
 
-1.0.0 (2020-12-21)
-==================
+(unreleased)
+============
 
-Features
---------
+- Update tooling
 
-- Add support for django-app-enabler (#63)
-- Update tooling and drop Python 2 / Django < 2.2 compatibility (#10208)
+0.9.0.dev8 (2020-11-23)
+=======================
 
-0.8.1 (2020-05-02)
-==================
-
-* Enable django CMS 3.7.2 on python 3
+* Port to django CMS 4.0
+* Fix djangocms-versioning integration
 
 0.8.0 (2020-01-12)
 ==================
