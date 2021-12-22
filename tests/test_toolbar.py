@@ -6,7 +6,7 @@ from django.contrib.auth.models import Permission, User
 from django.test.utils import override_settings
 from django.urls import reverse
 from django.utils.encoding import force_text
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from djangocms_page_sitemap.cms_toolbars import PAGE_SITEMAP_MENU_TITLE
 from djangocms_page_sitemap.models import PageSitemapProperties
@@ -147,8 +147,8 @@ class VersioningToolbarTest(CMSTestCase):
 
         user = self.get_superuser()
         page_1 = create_page('page-one', 'page.html', language='en', created_by=user)
-        page_content = create_title(title='pagecontent1', language='en', page=page_1,
-                                         created_by=user)
+        page_content = page_1.get_title_obj("en")
+
         if is_versioning_enabled():
             page_content.versions.first().publish(user)
         preview_endpoint = get_object_preview_url(page_content, language='en')

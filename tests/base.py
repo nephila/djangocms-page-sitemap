@@ -35,24 +35,9 @@ class BaseTest(TestCase):
         create_title(language='fr', title='page un', page=page_1, created_by=self.user)
         create_title(language='it', title='pagina uno', page=page_1, created_by=self.user)
         create_title(language='fr', title='page trois', page=page_3, created_by=self.user)
-        page_content1 = create_title(
-            title='pagecontent1_en',
-            language='en',
-            page=page_1,
-            created_by=self.user
-        )
-        page_content2 = create_title(
-            title='pagecontent2_en',
-            language='en',
-            page=page_2,
-            created_by=self.user
-        )
-        page_content3 = create_title(
-            title='pagecontent3_en',
-            language='en',
-            page=page_3,
-            created_by=self.user
-        )
+        page_content1 = page_1.get_title_obj("en")
+        page_content2 = page_2.get_title_obj("en")
+        page_content3 = page_3.get_title_obj("en")
         if is_versioning_enabled():
             page_content1.versions.first().publish(self.user)
             page_content2.versions.first().publish(self.user)
