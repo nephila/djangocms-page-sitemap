@@ -16,54 +16,55 @@ class DisableMigrations(object):
 def gettext(s):
     return s
 
+
 HELPER_SETTINGS = {
-    'NOSE_ARGS': [
-        '-s',
+    "NOSE_ARGS": [
+        "-s",
     ],
-    'CACHES': {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    "CACHES": {
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
         }
     },
-    'CMS_CACHE_DURATIONS': {
-        'menus': 10,
-        'content': 10,
-        'permissions': 10,
+    "CMS_CACHE_DURATIONS": {
+        "menus": 10,
+        "content": 10,
+        "permissions": 10,
     },
-    'ROOT_URLCONF': 'tests.test_utils.urls',
+    "ROOT_URLCONF": "tests.test_utils.urls",
     # FIXME: Django CMS migrtions with Django 2.2 produce an error when
     # running tests, temporarily disabling migrations
-    'MIGRATION_MODULES': DisableMigrations(),
-    'INSTALLED_APPS': [
-        'django.contrib.sitemaps',
+    "MIGRATION_MODULES": DisableMigrations(),
+    "INSTALLED_APPS": [
+        "django.contrib.sitemaps",
     ],
-    'LANGUAGE_CODE': 'en',
-    'TIME_ZONE': 'UTC',
-    'LANGUAGES': (
-        ('en', gettext('English')),
-        ('fr', gettext('French')),
-        ('it', gettext('Italiano')),
+    "LANGUAGE_CODE": "en",
+    "TIME_ZONE": "UTC",
+    "LANGUAGES": (
+        ("en", gettext("English")),
+        ("fr", gettext("French")),
+        ("it", gettext("Italiano")),
     ),
-    'CMS_LANGUAGES': {
+    "CMS_LANGUAGES": {
         1: [
             {
-                'code': 'en',
-                'name': gettext('English'),
-                'public': True,
+                "code": "en",
+                "name": gettext("English"),
+                "public": True,
             },
             {
-                'code': 'it',
-                'name': gettext('Italiano'),
-                'public': True,
+                "code": "it",
+                "name": gettext("Italiano"),
+                "public": True,
             },
             {
-                'code': 'fr',
-                'name': gettext('French'),
-                'public': True,
+                "code": "fr",
+                "name": gettext("French"),
+                "public": True,
             },
         ],
-        'default': {
-            'hide_untranslated': False,
+        "default": {
+            "hide_untranslated": False,
         },
     },
 
@@ -72,17 +73,17 @@ HELPER_SETTINGS = {
 
 def run():
     from app_helper import runner
-    runner.cms('djangocms_page_sitemap')
+    runner.cms("djangocms_page_sitemap")
 
 
 def setup():
     from app_helper import runner
-    runner.setup('djangocms_page_sitemap', sys.modules[__name__], use_cms=True)
+    runner.setup("djangocms_page_sitemap", sys.modules[__name__], use_cms=True)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     run()
 
-if __name__ == 'cms_helper':
+if __name__ == "cms_helper":
     # this is needed to run cms_helper in pycharm
     setup()

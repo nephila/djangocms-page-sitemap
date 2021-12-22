@@ -8,19 +8,19 @@ from django.core.exceptions import ObjectDoesNotExist
 register = template.Library()
 
 
-@register.tag(name='page_robots')
+@register.tag(name="page_robots")
 class PageRobots(Tag):
     """
     Generates the robots meta tag according to the extension attributes
     """
-    name = 'page_robots'
+    name = "page_robots"
     options = Options(
-        Argument('page', required=False),
-        Argument('site_id', required=False),
+        Argument("page", required=False),
+        Argument("site_id", required=False),
     )
 
     def render_tag(self, context, page, site_id):
-        request = context.get('request')
+        request = context.get("request")
         if not request:
             return ''
         if not site_id:
@@ -37,11 +37,11 @@ class PageRobots(Tag):
             return ''
         try:
             if page.pagesitemapproperties.noindex:
-                content.append('noindex')
+                content.append("noindex")
             if page.pagesitemapproperties.noarchive:
-                content.append('noarchive')
+                content.append("noarchive")
             if page.pagesitemapproperties.robots_extra:
                 content.append(page.pagesitemapproperties.robots_extra)
-            return '<meta name="robots" content="%s">' % ','.join(content)
+            return "<meta name=\"robots\" content=\"%s\">" % ','.join(content)
         except ObjectDoesNotExist:
-            return ''
+            return ""

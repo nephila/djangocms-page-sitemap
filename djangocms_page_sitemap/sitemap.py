@@ -20,7 +20,7 @@ class ExtendedSitemap(CMSSitemap):
         site = get_current_site()
         languages = get_public_languages(site_id=site.pk)
         page_content_prefetch = Prefetch(
-            'page__pagecontent_set',
+            "page__pagecontent_set",
             queryset=PageContent.objects.filter(
                 language__in=languages,
             )
@@ -37,7 +37,7 @@ class ExtendedSitemap(CMSSitemap):
                 page__node__site=site,
             )
                 .exclude(page__pagesitemapproperties__include_in_sitemap=False)
-                .order_by('page__node__path')
+                .order_by("page__node__path")
         )
         valid_urls = []
         for page_url in all_urls:
