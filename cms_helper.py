@@ -18,6 +18,7 @@ def gettext(s):
 
 
 HELPER_SETTINGS = {
+    "SECRET_KEY": "djangocms-page-sitemap-test-suite-key",
     "NOSE_ARGS": [
         "-s",
     ],
