@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import absolute_import, print_function, unicode_literals
-
 from django import template
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.sites.models import Site

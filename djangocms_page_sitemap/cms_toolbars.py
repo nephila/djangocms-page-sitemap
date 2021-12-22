@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import absolute_import, print_function, unicode_literals
-
 from cms.toolbar_pool import toolbar_pool
 from cms.utils.conf import get_cms_setting
 from cms.utils.permissions import has_page_permission
@@ -16,7 +13,7 @@ except ImportError:
     from cms.cms_toolbars import PageToolbar
 
 
-PAGE_SITEMAP_MENU_TITLE = _('Sitemap properties')
+PAGE_SITEMAP_MENU_TITLE = _("Sitemap properties")
 
 
 @toolbar_pool.register
@@ -28,9 +25,9 @@ class PageSitemapPropertiesMeta(PageToolbar):
             return
 
         # check global permissions if CMS_PERMISSIONS is active
-        if get_cms_setting('PERMISSION'):
+        if get_cms_setting("PERMISSION"):
             has_global_current_page_change_permission = has_page_permission(
-                self.request.user, self.request.current_page, 'change'
+                self.request.user, self.request.current_page, "change"
             )
         else:
             has_global_current_page_change_permission = False
@@ -41,7 +38,7 @@ class PageSitemapPropertiesMeta(PageToolbar):
         )
         if has_global_current_page_change_permission or can_change:
             not_edit_mode = not self.toolbar.edit_mode_active
-            current_page_menu = self.toolbar.get_or_create_menu('page')
+            current_page_menu = self.toolbar.get_or_create_menu("page")
             # Page tags
             try:
                 page_extension = PageSitemapProperties.objects.get(extended_object_id=self.page.pk)
@@ -49,11 +46,11 @@ class PageSitemapPropertiesMeta(PageToolbar):
                 page_extension = None
             try:
                 if page_extension:
-                    url = reverse('admin:djangocms_page_sitemap_pagesitemapproperties_change',
+                    url = reverse("admin:djangocms_page_sitemap_pagesitemapproperties_change",
                                   args=(page_extension.pk,))
                 else:
                     url = "%s?extended_object=%s" % (
-                        reverse('admin:djangocms_page_sitemap_pagesitemapproperties_add'),
+                        reverse("admin:djangocms_page_sitemap_pagesitemapproperties_add"),
                         self.page.pk)
             except NoReverseMatch:  # pragma: no cover
                 # not in urls

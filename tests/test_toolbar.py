@@ -1,20 +1,17 @@
-# -*- coding: utf-8 -*-
-from __future__ import absolute_import, print_function, unicode_literals
-
 from cms.api import create_page
+from cms.models import PageContent
 from cms.test_utils.testcases import CMSTestCase
 from cms.toolbar.items import Menu, ModalItem
 from cms.toolbar.utils import get_object_preview_url
 from django.contrib.auth.models import Permission, User
 from django.test.utils import override_settings
 from django.urls import reverse
-from django.utils.encoding import force_text
-from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import force_str
+from django.utils.translation import gettext_lazy as _
 
 from djangocms_page_sitemap.cms_toolbars import PAGE_SITEMAP_MENU_TITLE
 from djangocms_page_sitemap.models import PageSitemapProperties
 from djangocms_page_sitemap.utils import is_versioning_enabled
-
 
 from .base import BaseTest
 
@@ -74,11 +71,11 @@ class ToolbarTest(BaseTest):
         page_menu = toolbar.menus['page']
         try:
             self.assertEqual(
-                len(page_menu.find_items(ModalItem, name="%s..." % force_text(PAGE_SITEMAP_MENU_TITLE))), 1
+                len(page_menu.find_items(ModalItem, name="%s..." % force_str(PAGE_SITEMAP_MENU_TITLE))), 1
             )
         except AssertionError:
             self.assertEqual(
-                len(page_menu.find_items(ModalItem, name="%s ..." % force_text(PAGE_SITEMAP_MENU_TITLE))), 1
+                len(page_menu.find_items(ModalItem, name="%s ..." % force_str(PAGE_SITEMAP_MENU_TITLE))), 1
             )
 
     @override_settings(CMS_PERMISSION=True)
@@ -108,11 +105,11 @@ class ToolbarTest(BaseTest):
         page_menu = toolbar.menus['page']
         try:
             self.assertEqual(
-                len(page_menu.find_items(ModalItem, name="%s..." % force_text(PAGE_SITEMAP_MENU_TITLE))), 1
+                len(page_menu.find_items(ModalItem, name="%s..." % force_str(PAGE_SITEMAP_MENU_TITLE))), 1
             )
         except AssertionError:
             self.assertEqual(
-                len(page_menu.find_items(ModalItem, name="%s ..." % force_text(PAGE_SITEMAP_MENU_TITLE))), 1
+                len(page_menu.find_items(ModalItem, name="%s ..." % force_str(PAGE_SITEMAP_MENU_TITLE))), 1
             )
 
     def test_toolbar_with_items(self):
@@ -129,14 +126,14 @@ class ToolbarTest(BaseTest):
         page_menu = toolbar.menus['page']
         try:
             meta_menu = page_menu.find_items(
-                ModalItem, name="%s..." % force_text(PAGE_SITEMAP_MENU_TITLE)
+                ModalItem, name="%s..." % force_str(PAGE_SITEMAP_MENU_TITLE)
             )[0].item
         except IndexError:
             meta_menu = page_menu.find_items(
-                ModalItem, name="%s ..." % force_text(PAGE_SITEMAP_MENU_TITLE)
+                ModalItem, name="%s ..." % force_str(PAGE_SITEMAP_MENU_TITLE)
             )[0].item
         self.assertTrue(meta_menu.url.startswith(reverse('admin:djangocms_page_sitemap_pagesitemapproperties_change', args=(page_ext.pk,))))
-        self.assertEqual(force_text(page_ext), force_text(_('Sitemap values for Page %s') % page1.pk))
+        self.assertEqual(force_str(page_ext), force_str(_('Sitemap values for Page %s') % page1.pk))
 
 
 class VersioningToolbarTest(CMSTestCase):
@@ -147,12 +144,10 @@ class VersioningToolbarTest(CMSTestCase):
 
         This test Can be ran with or without versioning and should return the same result!
         """
-        from cms.api import create_title
-
         user = self.get_superuser()
         page_1 = create_page('page-one', 'page.html', language='en', created_by=user)
-        page_content = create_title(title='pagecontent1', language='en', page=page_1,
-                                         created_by=user)
+        page_content = PageContent._original_manager.get(page=page_1, language="en")
+
         if is_versioning_enabled():
             page_content.versions.first().publish(user)
         preview_endpoint = get_object_preview_url(page_content, language='en')
