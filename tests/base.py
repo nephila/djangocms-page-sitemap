@@ -71,7 +71,7 @@ class BaseTest(TestCase):
         else:
             request.GET = {'edit_off': None}
         request.current_page = page
-        mid = ToolbarMiddleware()
+        mid = ToolbarMiddleware(request)
         mid.process_request(request)
         return request
 

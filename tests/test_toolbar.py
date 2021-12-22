@@ -5,7 +5,7 @@ from cms.toolbar.utils import get_object_preview_url
 from django.contrib.auth.models import Permission, User
 from django.test.utils import override_settings
 from django.urls import reverse
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
 
 from djangocms_page_sitemap.cms_toolbars import PAGE_SITEMAP_MENU_TITLE
@@ -70,11 +70,11 @@ class ToolbarTest(BaseTest):
         page_menu = toolbar.menus['page']
         try:
             self.assertEqual(
-                len(page_menu.find_items(ModalItem, name="%s..." % force_text(PAGE_SITEMAP_MENU_TITLE))), 1
+                len(page_menu.find_items(ModalItem, name="%s..." % force_str(PAGE_SITEMAP_MENU_TITLE))), 1
             )
         except AssertionError:
             self.assertEqual(
-                len(page_menu.find_items(ModalItem, name="%s ..." % force_text(PAGE_SITEMAP_MENU_TITLE))), 1
+                len(page_menu.find_items(ModalItem, name="%s ..." % force_str(PAGE_SITEMAP_MENU_TITLE))), 1
             )
 
     @override_settings(CMS_PERMISSION=True)
@@ -104,11 +104,11 @@ class ToolbarTest(BaseTest):
         page_menu = toolbar.menus['page']
         try:
             self.assertEqual(
-                len(page_menu.find_items(ModalItem, name="%s..." % force_text(PAGE_SITEMAP_MENU_TITLE))), 1
+                len(page_menu.find_items(ModalItem, name="%s..." % force_str(PAGE_SITEMAP_MENU_TITLE))), 1
             )
         except AssertionError:
             self.assertEqual(
-                len(page_menu.find_items(ModalItem, name="%s ..." % force_text(PAGE_SITEMAP_MENU_TITLE))), 1
+                len(page_menu.find_items(ModalItem, name="%s ..." % force_str(PAGE_SITEMAP_MENU_TITLE))), 1
             )
 
     def test_toolbar_with_items(self):
@@ -125,14 +125,14 @@ class ToolbarTest(BaseTest):
         page_menu = toolbar.menus['page']
         try:
             meta_menu = page_menu.find_items(
-                ModalItem, name="%s..." % force_text(PAGE_SITEMAP_MENU_TITLE)
+                ModalItem, name="%s..." % force_str(PAGE_SITEMAP_MENU_TITLE)
             )[0].item
         except IndexError:
             meta_menu = page_menu.find_items(
-                ModalItem, name="%s ..." % force_text(PAGE_SITEMAP_MENU_TITLE)
+                ModalItem, name="%s ..." % force_str(PAGE_SITEMAP_MENU_TITLE)
             )[0].item
         self.assertTrue(meta_menu.url.startswith(reverse('admin:djangocms_page_sitemap_pagesitemapproperties_change', args=(page_ext.pk,))))
-        self.assertEqual(force_text(page_ext), force_text(_('Sitemap values for Page %s') % page1.pk))
+        self.assertEqual(force_str(page_ext), force_str(_('Sitemap values for Page %s') % page1.pk))
 
 
 class VersioningToolbarTest(CMSTestCase):
