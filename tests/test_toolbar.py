@@ -12,7 +12,6 @@ from djangocms_page_sitemap.cms_toolbars import PAGE_SITEMAP_MENU_TITLE
 from djangocms_page_sitemap.models import PageSitemapProperties
 from djangocms_page_sitemap.utils import is_versioning_enabled
 
-
 from .base import BaseTest
 
 

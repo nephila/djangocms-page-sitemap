@@ -1,5 +1,5 @@
 import django.core.validators
-from django.db import models, migrations
+from django.db import migrations, models
 
 from djangocms_page_sitemap.settings import PAGE_SITEMAP_CHANGEFREQ_LIST
 
