@@ -38,6 +38,7 @@ HELPER_SETTINGS = {
     "MIGRATION_MODULES": DisableMigrations(),
     "INSTALLED_APPS": [
         "django.contrib.sitemaps",
+        'djangocms_versioning',
     ],
     "LANGUAGE_CODE": "en",
     "TIME_ZONE": "UTC",

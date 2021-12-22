@@ -1,4 +1,5 @@
 from cms.api import create_page
+from cms.models import PageContent
 from cms.test_utils.testcases import CMSTestCase
 from cms.toolbar.items import Menu, ModalItem
 from cms.toolbar.utils import get_object_preview_url
@@ -143,11 +144,9 @@ class VersioningToolbarTest(CMSTestCase):
 
         This test Can be ran with or without versioning and should return the same result!
         """
-        from cms.api import create_title
-
         user = self.get_superuser()
         page_1 = create_page('page-one', 'page.html', language='en', created_by=user)
-        page_content = page_1.get_title_obj("en")
+        page_content = PageContent._original_manager.get(page=page_1, language="en")
 
         if is_versioning_enabled():
             page_content.versions.first().publish(user)
