@@ -8,7 +8,7 @@ from invoke import task
 
 DOCS_PORT = os.environ.get("DOCS_PORT", 8000)
 #: branch prefixes for which some checks are skipped
-SPECIAL_BRANCHES = ("master", "develop", "release")
+SPECIAL_BRANCHES = ("master", "develop", "release", "support/4.0.x")
 
 
 @task

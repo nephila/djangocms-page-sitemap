@@ -6,13 +6,6 @@ History
 
 .. towncrier release notes start
 
-(unreleased)
-============
-
-* Update tooling and ci test suite to Github Actions
-* Add compatibility with Django 3.2
-* Drop compatibility with Django < 2.2
-
 0.9.0.dev8 (2020-11-23)
 =======================
 
