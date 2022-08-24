@@ -17,7 +17,7 @@ PAGE_SITEMAP_CHANGEFREQ_DEFAULT_LIST = {
 class Form(forms.BaseForm):
     PAGE_SITEMAP_DEFAULT_CHANGEFREQ = forms.SelectField(
         "Default changefrequency (default: django CMS value -monthly-)",
-        choices=PAGE_SITEMAP_CHANGEFREQ_DEFAULT_LIST.items(),
+        choices=list(PAGE_SITEMAP_CHANGEFREQ_DEFAULT_LIST.items()),
     )
     PAGE_SITEMAP_CACHE_DURATION = forms.CharField(
         "Cache duration (default: same as django CMS menu cache)", required=False
