@@ -1,6 +1,6 @@
-=======
+===========
 Credits
-=======
+===========
 
 Development Lead
 ----------------
@@ -12,5 +12,8 @@ Contributors
 
 * Anton Egorov
 * carderm
+* Fabrice Pardo
+* fp4code
 * Jeroen Peters
+* Leonardo Cavallucci
 * vipulnarang95

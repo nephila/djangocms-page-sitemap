@@ -1,7 +1,7 @@
 from cms.sitemaps import CMSSitemap
 from cms.utils.conf import get_cms_setting
 from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 PAGE_SITEMAP_CHANGEFREQ_DEFAULT_LIST = {
     "always": _("always"),
@@ -12,10 +12,6 @@ PAGE_SITEMAP_CHANGEFREQ_DEFAULT_LIST = {
     "yearly": _("yearly"),
     "never": _("never"),
 }
-PAGE_SITEMAP_CHANGEFREQ_LIST = getattr(
-    settings, "PAGE_SITEMAP_CHANGEFREQ_LIST", PAGE_SITEMAP_CHANGEFREQ_DEFAULT_LIST
-)
-PAGE_SITEMAP_DEFAULT_CHANGEFREQ = getattr(
-    settings, "PAGE_SITEMAP_DEFAULT_CHANGEFREQ", CMSSitemap.changefreq
-)
+PAGE_SITEMAP_CHANGEFREQ_LIST = getattr(settings, "PAGE_SITEMAP_CHANGEFREQ_LIST", PAGE_SITEMAP_CHANGEFREQ_DEFAULT_LIST)
+PAGE_SITEMAP_DEFAULT_CHANGEFREQ = getattr(settings, "PAGE_SITEMAP_DEFAULT_CHANGEFREQ", CMSSitemap.changefreq)
 PAGE_SITEMAP_CACHE_DURATION = get_cms_setting("CACHE_DURATIONS")["menus"]

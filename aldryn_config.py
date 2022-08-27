@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 try:
     from divio_cli import forms
 except ImportError:
@@ -21,8 +20,7 @@ class Form(forms.BaseForm):
         choices=PAGE_SITEMAP_CHANGEFREQ_DEFAULT_LIST.items(),
     )
     PAGE_SITEMAP_CACHE_DURATION = forms.CharField(
-        "Cache duration (default: same as django CMS menu cache)",
-        required=False
+        "Cache duration (default: same as django CMS menu cache)", required=False
     )
 
     def to_settings(self, data, settings):

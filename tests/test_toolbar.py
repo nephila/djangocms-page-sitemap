@@ -25,23 +25,21 @@ def find_toolbar_buttons(button_name, toolbar):
     """
     found = []
     for button_list in toolbar.get_right_items():
-        found = found + [
-            button for button in button_list.buttons if button.name == button_name
-        ]
+        found = found + [button for button in button_list.buttons if button.name == button_name]
     return found
 
 
 class ToolbarTest(BaseTest):
-
     def test_no_page(self):
         """
         Test that no page menu is present if request not in a page
         """
         from cms.toolbar.toolbar import CMSToolbar
-        request = self.get_page_request(None, self.user, '/', edit=True)
+
+        request = self.get_page_request(None, self.user, "/", edit=True)
         toolbar = CMSToolbar(request)
         toolbar.get_left_items()
-        page_menu = toolbar.find_items(Menu, name='Page')
+        page_menu = toolbar.find_items(Menu, name="Page")
         self.assertEqual(page_menu, [])
 
     def test_no_perm(self):
@@ -49,11 +47,12 @@ class ToolbarTest(BaseTest):
         Test that no page menu is present if user has no perm
         """
         from cms.toolbar.toolbar import CMSToolbar
+
         page1, page2, page3 = self.get_pages()
-        request = self.get_page_request(page1, self.user_staff, '/', edit=True)
+        request = self.get_page_request(page1, self.user_staff, "/", edit=True)
         toolbar = CMSToolbar(request)
         toolbar.get_left_items()
-        page_menu = toolbar.find_items(Menu, name='Page')
+        page_menu = toolbar.find_items(Menu, name="Page")
 
         self.assertEqual(len(page_menu), 1)
 
@@ -62,13 +61,14 @@ class ToolbarTest(BaseTest):
         Test that page meta menu is present if user has Page.change_perm
         """
         from cms.toolbar.toolbar import CMSToolbar
+
         page1, page2, page3 = self.get_pages()
-        self.user_staff.user_permissions.add(Permission.objects.get(codename='change_page'))
+        self.user_staff.user_permissions.add(Permission.objects.get(codename="change_page"))
         self.user_staff = User.objects.get(pk=self.user_staff.pk)
-        request = self.get_page_request(page1, self.user_staff, '/', edit=True)
+        request = self.get_page_request(page1, self.user_staff, "/", edit=True)
         toolbar = CMSToolbar(request)
         toolbar.get_left_items()
-        page_menu = toolbar.menus['page']
+        page_menu = toolbar.menus["page"]
         try:
             self.assertEqual(
                 len(page_menu.find_items(ModalItem, name="%s..." % force_str(PAGE_SITEMAP_MENU_TITLE))), 1
@@ -84,13 +84,14 @@ class ToolbarTest(BaseTest):
         Test that no page menu is present if user has general page Page.change_perm  but not permission on current page
         """
         from cms.toolbar.toolbar import CMSToolbar
+
         page1, page2, page3 = self.get_pages()
-        self.user_staff.user_permissions.add(Permission.objects.get(codename='change_page'))
+        self.user_staff.user_permissions.add(Permission.objects.get(codename="change_page"))
         self.user_staff = User.objects.get(pk=self.user_staff.pk)
-        request = self.get_page_request(page1, self.user_staff, '/', edit=True)
+        request = self.get_page_request(page1, self.user_staff, "/", edit=True)
         toolbar = CMSToolbar(request)
         toolbar.get_left_items()
-        page_menu = toolbar.find_items(Menu, name='Page')
+        page_menu = toolbar.find_items(Menu, name="Page")
         self.assertEqual(len(page_menu), 1)
 
     def test_toolbar(self):
@@ -98,11 +99,12 @@ class ToolbarTest(BaseTest):
         Test that PageSitemapProperties item is present for superuser
         """
         from cms.toolbar.toolbar import CMSToolbar
+
         page1, page2, page3 = self.get_pages()
-        request = self.get_page_request(page1, self.user, '/', edit=True)
+        request = self.get_page_request(page1, self.user, "/", edit=True)
         toolbar = CMSToolbar(request)
         toolbar.get_left_items()
-        page_menu = toolbar.menus['page']
+        page_menu = toolbar.menus["page"]
         try:
             self.assertEqual(
                 len(page_menu.find_items(ModalItem, name="%s..." % force_str(PAGE_SITEMAP_MENU_TITLE))), 1
@@ -117,27 +119,26 @@ class ToolbarTest(BaseTest):
         Test that PageSitemapProperties item is present for superuser if PageSitemapProperties exists for current page
         """
         from cms.toolbar.toolbar import CMSToolbar
+
         page1, page2, page3 = self.get_pages()
-        page_ext = PageSitemapProperties.objects.create(
-            extended_object=page1, priority='0.2', changefreq='never')
-        request = self.get_page_request(page1, self.user, '/', edit=True)
+        page_ext = PageSitemapProperties.objects.create(extended_object=page1, priority="0.2", changefreq="never")
+        request = self.get_page_request(page1, self.user, "/", edit=True)
         toolbar = CMSToolbar(request)
         toolbar.get_left_items()
-        page_menu = toolbar.menus['page']
+        page_menu = toolbar.menus["page"]
         try:
-            meta_menu = page_menu.find_items(
-                ModalItem, name="%s..." % force_str(PAGE_SITEMAP_MENU_TITLE)
-            )[0].item
+            meta_menu = page_menu.find_items(ModalItem, name="%s..." % force_str(PAGE_SITEMAP_MENU_TITLE))[0].item
         except IndexError:
-            meta_menu = page_menu.find_items(
-                ModalItem, name="%s ..." % force_str(PAGE_SITEMAP_MENU_TITLE)
-            )[0].item
-        self.assertTrue(meta_menu.url.startswith(reverse('admin:djangocms_page_sitemap_pagesitemapproperties_change', args=(page_ext.pk,))))
-        self.assertEqual(force_str(page_ext), force_str(_('Sitemap values for Page %s') % page1.pk))
+            meta_menu = page_menu.find_items(ModalItem, name="%s ..." % force_str(PAGE_SITEMAP_MENU_TITLE))[0].item
+        self.assertTrue(
+            meta_menu.url.startswith(
+                reverse("admin:djangocms_page_sitemap_pagesitemapproperties_change", args=(page_ext.pk,))
+            )
+        )
+        self.assertEqual(force_str(page_ext), force_str(_("Sitemap values for Page %s") % page1.pk))
 
 
 class VersioningToolbarTest(CMSTestCase):
-
     def test_toolbar_buttons_are_not_duplicated(self):
         """
         The toolbar for djangocms-page-sitemap doesn't affect the toolbar buttons.
@@ -145,12 +146,12 @@ class VersioningToolbarTest(CMSTestCase):
         This test Can be ran with or without versioning and should return the same result!
         """
         user = self.get_superuser()
-        page_1 = create_page('page-one', 'page.html', language='en', created_by=user)
+        page_1 = create_page("page-one", "page.html", language="en", created_by=user)
         page_content = PageContent._original_manager.get(page=page_1, language="en")
 
         if is_versioning_enabled():
             page_content.versions.first().publish(user)
-        preview_endpoint = get_object_preview_url(page_content, language='en')
+        preview_endpoint = get_object_preview_url(page_content, language="en")
 
         with self.login_user_context(self.get_superuser()):
             response = self.client.post(preview_endpoint)
