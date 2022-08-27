@@ -1,8 +1,9 @@
+from io import StringIO
+
 from cms.utils.i18n import get_language_list
 from django.contrib.auth.models import User
 from django.http import SimpleCookie
 from django.test import RequestFactory, TestCase
-from six import StringIO
 
 
 class BaseTest(TestCase):

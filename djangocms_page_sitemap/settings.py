@@ -1,7 +1,7 @@
 from cms.sitemaps import CMSSitemap
 from cms.utils.conf import get_cms_setting
 from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 PAGE_SITEMAP_CHANGEFREQ_DEFAULT_LIST = {
     "always": _("always"),
