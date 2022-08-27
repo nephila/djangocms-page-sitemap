@@ -19,7 +19,9 @@ class PageSitemapPropertiesMeta(CMSToolbar):
         # always use draft if we have a page
         self.page = get_page_draft(self.request.current_page)
         if not self.page:
-            # Nothing to do
+            return
+        if self.page.is_page_type:
+            # we don't need this on page types
             return
 
         # check global permissions if CMS_PERMISSIONS is active
