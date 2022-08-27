@@ -13,9 +13,9 @@ jobs:
         cms: [39,38,37]
         exclude:
           - django: 32
-            cms: cms37
+            cms: 37
           - django: 32
-            cms: cms38
+            cms: 38
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
