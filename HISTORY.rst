@@ -6,6 +6,15 @@ History
 
 .. towncrier release notes start
 
+
+2.0.0.dev1 (2020-12-21)
+========================
+
+Features
+--------
+
+* Port to django CMS 4.0
+
 1.0.0 (2020-12-21)
 ==================
 
