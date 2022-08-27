@@ -7,6 +7,7 @@ def gettext(s):
 
 HELPER_SETTINGS = {
     "SECRET_KEY": "djangocms-page-sitemap-test-suite-key",
+    "CMS_CONFIRM_VERSION4": True,
     "CACHES": {
         "default": {
             "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
