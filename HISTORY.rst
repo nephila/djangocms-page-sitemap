@@ -6,6 +6,17 @@ History
 
 .. towncrier release notes start
 
+1.1.0 (2022-08-27)
+==================
+
+Bugfixes
+--------
+
+- Fix error when populating the toolbar on page types (#67)
+- Fixed serialization issue when trying to upload the addon to Divio Cloud. (#73)
+- Add support for Django 3.2 / django CMS 3.10 (#74)
+
+
 1.0.0 (2020-12-21)
 ==================
 
