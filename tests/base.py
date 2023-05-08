@@ -2,7 +2,7 @@ from io import StringIO
 
 from cms.utils.i18n import get_language_list
 from django.contrib.auth.models import User
-from django.http import SimpleCookie
+from django.http import HttpResponse, SimpleCookie
 from django.test import RequestFactory, TestCase
 
 
@@ -74,8 +74,12 @@ class BaseTest(TestCase):
         else:
             request.GET = {"edit_off": None}
         request.current_page = page
-        mid = ToolbarMiddleware()
-        mid.process_request(request)
+        if hasattr(ToolbarMiddleware, "process_request"):
+            mid = ToolbarMiddleware()
+            mid.process_request(request)
+        else:
+            mid = ToolbarMiddleware(lambda req: HttpResponse())
+            mid.__call__(request)
         return request
 
     @classmethod
