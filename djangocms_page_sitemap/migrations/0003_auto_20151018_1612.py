@@ -5,7 +5,6 @@ from djangocms_page_sitemap.settings import PAGE_SITEMAP_CHANGEFREQ_LIST
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("djangocms_page_sitemap", "0002_auto_20151018_1451"),
     ]

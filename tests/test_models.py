@@ -10,7 +10,6 @@ from .base import BaseTest
 
 class RobotsTest(BaseTest):
     def _test_robots_tag(self, template_string, context, expected):
-
         tpl_obj = template.Template(template_string)
         ctx_obj = template.Context(context)
         rendered = tpl_obj.render(ctx_obj)
