@@ -3,5 +3,3 @@ coverage>5
 coveralls>2
 mock>=1.0.1
 django-app-helper>=2.0.0
-
-https://github.com/Aiky30/djangocms-versioning/tarball/feature/django-32-compat#egg=djangocms-versioning

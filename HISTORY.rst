@@ -6,11 +6,40 @@ History
 
 .. towncrier release notes start
 
-0.9.0.dev8 (2020-11-23)
-=======================
+1.2.0 (2023-05-08)
+==================
 
-* Port to django CMS 4.0
-* Fix djangocms-versioning integration
+Features
+--------
+
+- Update GH actions / linting configuration (#79)
+- Add support for Django 4.2 / django CMS 3.11
+
+
+1.1.0 (2022-08-27)
+==================
+
+Bugfixes
+--------
+
+- Fix error when populating the toolbar on page types (#67)
+- Fixed serialization issue when trying to upload the addon to Divio Cloud. (#73)
+- Add support for Django 3.2 / django CMS 3.10 (#74)
+
+
+1.0.0 (2020-12-21)
+==================
+
+Features
+--------
+
+- Add support for django-app-enabler (#63)
+- Update tooling and drop Python 2 / Django < 2.2 compatibility (#10208)
+
+0.8.1 (2020-05-02)
+==================
+
+* Enable django CMS 3.7.2 on python 3
 
 0.8.0 (2020-01-12)
 ==================

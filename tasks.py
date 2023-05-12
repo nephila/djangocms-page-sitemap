@@ -8,7 +8,7 @@ from invoke import task
 
 DOCS_PORT = os.environ.get("DOCS_PORT", 8000)
 #: branch prefixes for which some checks are skipped
-SPECIAL_BRANCHES = ("master", "develop", "release", "support/4.0.x")
+SPECIAL_BRANCHES = ("master", "develop", "release")
 
 
 @task
@@ -97,14 +97,12 @@ def test(c):
 @task
 def test_all(c):
     """Run all tox environments."""
-    """ Run all tox environments. """
     c.run("tox")
 
 
 @task
 def coverage(c):
     """Run test with coverage in local environment."""
-    """ Run test with coverage in local environment. """
     c.run("coverage erase")
     c.run("run setup.py test")
     c.run("report -m")

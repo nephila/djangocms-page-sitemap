@@ -135,11 +135,13 @@ class ToolbarTest(BaseTest):
         page_menu = toolbar.menus["page"]
         try:
             self.assertEqual(
-                len(page_menu.find_items(ModalItem, name="%s..." % force_str(PAGE_SITEMAP_MENU_TITLE))), 1
+                len(page_menu.find_items(ModalItem, name="%s..." % force_str(PAGE_SITEMAP_MENU_TITLE))),
+                1,
             )
         except AssertionError:
             self.assertEqual(
-                len(page_menu.find_items(ModalItem, name="%s ..." % force_str(PAGE_SITEMAP_MENU_TITLE))), 1
+                len(page_menu.find_items(ModalItem, name="%s ..." % force_str(PAGE_SITEMAP_MENU_TITLE))),
+                1,
             )
 
     def test_toolbar_with_items(self):

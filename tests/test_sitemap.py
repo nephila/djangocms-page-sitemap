@@ -28,7 +28,8 @@ class SitemapTest(BaseTest):
     def test_sitemap_extended(self):
         page1, page2, page3 = self.get_pages()
         PageSitemapProperties.objects.create(extended_object=page1, priority="0.2", changefreq="never")
-
+        if hasattr(page1, "publish"):
+            page1.publish("it")
         test_string = (
             "<url><loc>http://example.com/%s/</loc><lastmod>%s</lastmod><changefreq>"
             "never</changefreq><priority>0.2</priority></url>"
@@ -49,16 +50,22 @@ class SitemapTest(BaseTest):
         sitemap = ExtendedSitemap()
         # unpublished since change, still in the sitemap
         self.assertEqual(len(sitemap.items()), 4)
+        if hasattr(page1, "publish"):
+            page3.publish('en')
+            page3.publish('fr')
         sitemap = ExtendedSitemap()
         # published, then no longer in the sitemap
         self.assertEqual(len(sitemap.items()), 4)
 
     def test_sitemap_cache(self):
         page1, page2, page3 = self.get_pages()
-
         PageSitemapProperties.objects.create(extended_object=page1, priority="0.2", changefreq="never")
         PageSitemapProperties.objects.create(extended_object=page3, priority="0.8", changefreq="hourly")
-
+        if hasattr(page1, "publish"):
+            page1.publish("fr")
+            page1 = page1.get_public_object()
+            page3.publish("fr")
+            page3 = page3.get_public_object()
         sitemap = ExtendedSitemap()
         self.assertEqual(len(sitemap.items()), 6)
 
