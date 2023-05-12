@@ -40,7 +40,7 @@ def towncrier_check(c):  # NOQA
     """Check towncrier files."""
     output = io.StringIO()
     c.run("git branch --contains HEAD", out_stream=output)
-    skipped_branch_prefix = ["pull/", "develop", "master", "HEAD"]
+    skipped_branch_prefix = ["pull/", "develop", "master", "HEAD", "support/"]
     # cleanup branch names by removing PR-only names in local, remote and disconnected branches to ensure the current
     # (i.e. user defined) branch name is used
     branches = list(
