@@ -8,23 +8,23 @@ django CMS page extension to handle sitemap customization
 
 Support Python version:
 
-* Python 2.7, 3.5, 3.6, 3.7
+* Python 3.7, 3.8, 3.9, 3.10
 
 Supported Django versions:
 
-* Django 1.11 to 2.2
+* Django 2.2, 3.2
 
 Supported django CMS versions:
 
-* django CMS 3.6+
+* django CMS 3.7 - 3.10
 
 .. note:: djangocms-page-sitemap 0.8 has been relicensed with BSD license.
 
-.. note:: djangocms-page-sitemap 0.7 dropped compatibility with django CMS < 3.6. 0.6.x releases will be made if necessary after 0.6 release.
+.. note:: djangocms-page-sitemap 1.0 dropped compatibility with Python 2 and  Django < 2.2
 
-
+********
 Features
---------
+********
 
 * Support for changefreq and priority customisation per-page
 * Option to exclude a page from the Sitemap
@@ -33,78 +33,91 @@ Features
 * Available on Divio Cloud
 
 
+**********
 Quickstart
-----------
+**********
 
 * Install djangocms-page-sitemap::
 
     pip install djangocms-page-sitemap
 
-* Add to ``INSTALLED_APPS`` with ``django.contrib.sitemaps``::
+* Add to ``INSTALLED_APPS`` with ``django.contrib.sitemaps``:
 
-    INSTALLED_APPS = [
+  .. code-block:: python
+
+        INSTALLED_APPS = [
+            ...
+            "django.contrib.sitemaps",
+            "djangocms_page_sitemap",
+        ]
+
+* Load it into the urlconf, eventually removing django CMS sitemap:
+
+  .. code-block:: python
+
         ...
-        'django.contrib.sitemaps',
-        'djangocms_page_sitemap',
-    ]
+        urlpatterns = [
+            path("admin/", admin.site.urls),
+            ...
+            path("", include("djangocms_page_sitemap.sitemap_urls")),
+            ...
+        ]
 
-* Add to the urlconf, eventually removing django CMS sitemap::
+* Load ``robots_index`` templatetag and add it to the page in the head tag of the django CMS pages (or in a shared base template):
 
+  .. code-block:: html+django
 
-    from djangocms_page_sitemap import sitemap_urls
+        {% load robots_index %}
 
-    ...
-
-    urlpatterns = [
-        url(r'^admin/', include(admin.site.urls)),
         ...
-        url(r'^', include(sitemap_urls)),
-        ...
-    ]
-
-* Add the following snippets to the django CMS templates::
-
-    {% load robots_index %}
-
-    ...
-    <head>
-    <!-- somewhere in the head tag -->
-    {% page_robots %}
-    </head>
-    ...
+        <head>
+        <!-- somewhere in the head tag -->
+        {% page_robots %}
+        </head>
+         ...
 
 * If you need to provide a custom sitemap configuration (for example to add more
-  sitemap classes to it, you can append the sitemap url explicitly::
+  sitemap classes to it, you can append the sitemap url explicitly:
 
-    from django.contrib.sitemaps.views import sitemap
-    from djangocms_page_sitemap.sitemap import ExtendedSitemap
-    from myapp.sitemaps import MySiteSitemap
+  .. code-block:: python
+
+        from django.contrib.sitemaps.views import sitemap
+        from djangocms_page_sitemap.sitemap import ExtendedSitemap
+        from myapp.sitemaps import MySiteSitemap
+
+        urlpatterns = [
+            ...
+            path("sitemap.xml", sitemap, {
+                "sitemaps": {
+                    "cmspages": ExtendedSitemap, "myapp": MySiteSitemap,
+                }
+            ),
+            ...
+        ]
 
 
-    urlpatterns = patterns(
-        '',
-        ...
-        url(r'^sitemap\.xml$', sitemap,
-            {'sitemaps': {
-                'cmspages': ExtendedSitemap, 'myapp': MySiteSitemap,
-            }
-        }),
-    )
+**************************
+django-app-enabler support
+**************************
 
+`django-app-enabler`_ is supported.
 
-* Add the following snippets to the django CMS templates::
+You can either
 
-    {% load robots_index %}
+* Installation & configuration: ``python -mapp_enabler install djangocms-page-meta``
+* Autoconfiguration: ``python -mapp_enabler enable djangocms_page_meta``
 
-     ...
-    <head>
-    <!-- somewhere in the head tag -->
-    {% page_robots %}
-    </head>
-    ...
+Fully using this package will require some changes that cannot be modified by ``django-app-enabler``:
 
+* Remove any existing sitemap declaration from ``urls.py``;
+* Load robots tags in the page like outlined above;
+* Run migrations: ``python manage.py migrate``
+
+Check documentation above for details.
+
+**********
 Usage
------
+**********
 
 After installing as above, you will be able to tune the sitemap setting for each page.
 
@@ -116,11 +129,11 @@ For each page you will be able to set the following flags / values:
 * Sitemap priority (default: 0.5)
 * Include page in sitemap (default: ``True``)
 * Set ``noindex`` value to page robots meta tag
-* Set ``noarchite`` value to page robots meta tag
+* Set ``noarchive`` value to page robots meta tag
 * Provide any additional robots meta tag values
 
 page_robots options
--------------------
+===================
 
 ``page_robots`` meta tag accepts the following parameters:
 
@@ -129,7 +142,7 @@ page_robots options
 * ``site``: the current site id (default: current site).
 
 Settings
---------
+===================
 
 * PAGE_SITEMAP_CHANGEFREQ_LIST: List of frequency changes
 * PAGE_SITEMAP_DEFAULT_CHANGEFREQ: Default changefrequency (default: django CMS value -monthly-)
@@ -137,6 +150,7 @@ Settings
 
 
 .. _page lookup: https://docs.django-cms.org/en/reference/templatetags.html#page_lookup
+.. _django-app-enabler: https://github.com/nephila/django-app-enabler
 
 
 .. |Gitter| image:: https://img.shields.io/badge/GITTER-join%20chat-brightgreen.svg?style=flat-square

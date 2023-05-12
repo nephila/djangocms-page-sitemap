@@ -15,6 +15,7 @@ def get_cache_key(page):
 
 def is_versioning_enabled():
     from cms.models import PageContent
+
     try:
         app_config = apps.get_app_config("djangocms_versioning")
         return app_config.cms_extension.is_content_model_versioned(PageContent)

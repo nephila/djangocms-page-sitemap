@@ -23,21 +23,19 @@ class ExtendedSitemap(CMSSitemap):
             "page__pagecontent_set",
             queryset=PageContent.objects.filter(
                 language__in=languages,
-            )
+            ),
         )
         all_urls = (
-            PageUrl
-                .objects
-                .get_for_site(site)
-                .prefetch_related(page_content_prefetch)
-                .filter(
+            PageUrl.objects.get_for_site(site)
+            .prefetch_related(page_content_prefetch)
+            .filter(
                 language__in=languages,
                 path__isnull=False,
                 page__login_required=False,
                 page__node__site=site,
             )
-                .exclude(page__pagesitemapproperties__include_in_sitemap=False)
-                .order_by("page__node__path")
+            .exclude(page__pagesitemapproperties__include_in_sitemap=False)
+            .order_by("page__node__path")
         )
         valid_urls = []
         for page_url in all_urls:
@@ -55,7 +53,11 @@ class ExtendedSitemap(CMSSitemap):
             return properties.priority
         else:
             try:
-                cache.set(ext_key, title.page.pagesitemapproperties, PAGE_SITEMAP_CACHE_DURATION)
+                cache.set(
+                    ext_key,
+                    title.page.pagesitemapproperties,
+                    PAGE_SITEMAP_CACHE_DURATION,
+                )
                 return title.page.pagesitemapproperties.priority
             except PageSitemapProperties.DoesNotExist:
                 return self.default_priority
@@ -67,7 +69,11 @@ class ExtendedSitemap(CMSSitemap):
             return properties.changefreq
         else:
             try:
-                cache.set(ext_key, title.page.pagesitemapproperties, PAGE_SITEMAP_CACHE_DURATION)
+                cache.set(
+                    ext_key,
+                    title.page.pagesitemapproperties,
+                    PAGE_SITEMAP_CACHE_DURATION,
+                )
                 return title.page.pagesitemapproperties.changefreq
             except PageSitemapProperties.DoesNotExist:
                 return self.default_changefreq

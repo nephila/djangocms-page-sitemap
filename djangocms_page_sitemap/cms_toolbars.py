@@ -2,7 +2,7 @@ from cms.toolbar_pool import toolbar_pool
 from cms.utils.conf import get_cms_setting
 from cms.utils.permissions import has_page_permission
 from django.urls import NoReverseMatch, reverse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from .models import PageSitemapProperties
 
@@ -32,10 +32,7 @@ class PageSitemapPropertiesMeta(PageToolbar):
         else:
             has_global_current_page_change_permission = False
         # check if user has page edit permission
-        can_change = (
-            self.request.current_page and
-            self.request.current_page.has_change_permission(self.request.user)
-        )
+        can_change = self.request.current_page and self.request.current_page.has_change_permission(self.request.user)
         if has_global_current_page_change_permission or can_change:
             not_edit_mode = not self.toolbar.edit_mode_active
             current_page_menu = self.toolbar.get_or_create_menu("page")
@@ -46,16 +43,15 @@ class PageSitemapPropertiesMeta(PageToolbar):
                 page_extension = None
             try:
                 if page_extension:
-                    url = reverse("admin:djangocms_page_sitemap_pagesitemapproperties_change",
-                                  args=(page_extension.pk,))
+                    url = reverse(
+                        "admin:djangocms_page_sitemap_pagesitemapproperties_change", args=(page_extension.pk,)
+                    )
                 else:
-                    url = "%s?extended_object=%s" % (
-                        reverse("admin:djangocms_page_sitemap_pagesitemapproperties_add"),
-                        self.page.pk)
+                    url = "{}?extended_object={}".format(
+                        reverse("admin:djangocms_page_sitemap_pagesitemapproperties_add"), self.page.pk
+                    )
             except NoReverseMatch:  # pragma: no cover
                 # not in urls
                 pass
             else:
-                current_page_menu.add_modal_item(
-                    PAGE_SITEMAP_MENU_TITLE, url=url, disabled=not_edit_mode
-                )
+                current_page_menu.add_modal_item(PAGE_SITEMAP_MENU_TITLE, url=url, disabled=not_edit_mode)

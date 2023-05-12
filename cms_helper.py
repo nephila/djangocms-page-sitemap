@@ -1,16 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-from __future__ import absolute_import, print_function, unicode_literals
-
-import sys
-
-
-class DisableMigrations(object):
-    def __contains__(self, item):
-        return True
-
-    def __getitem__(self, item):
-        return None
 
 
 def gettext(s):
@@ -18,10 +6,6 @@ def gettext(s):
 
 
 HELPER_SETTINGS = {
-    "SECRET_KEY": "djangocms-page-sitemap-test-suite-key",
-    "NOSE_ARGS": [
-        "-s",
-    ],
     "CACHES": {
         "default": {
             "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
@@ -33,12 +17,9 @@ HELPER_SETTINGS = {
         "permissions": 10,
     },
     "ROOT_URLCONF": "tests.test_utils.urls",
-    # FIXME: Django CMS migrtions with Django 2.2 produce an error when
-    # running tests, temporarily disabling migrations
-    "MIGRATION_MODULES": DisableMigrations(),
     "INSTALLED_APPS": [
         "django.contrib.sitemaps",
-        'djangocms_versioning',
+        "djangocms_versioning",
     ],
     "LANGUAGE_CODE": "en",
     "TIME_ZONE": "UTC",
@@ -69,17 +50,20 @@ HELPER_SETTINGS = {
             "hide_untranslated": False,
         },
     },
-
 }
 
 
 def run():
     from app_helper import runner
+
     runner.cms("djangocms_page_sitemap")
 
 
 def setup():
+    import sys
+
     from app_helper import runner
+
     runner.setup("djangocms_page_sitemap", sys.modules[__name__], use_cms=True)
 
 
