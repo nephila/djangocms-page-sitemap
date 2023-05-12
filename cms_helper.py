@@ -16,10 +16,10 @@ HELPER_SETTINGS = {
         "content": 10,
         "permissions": 10,
     },
+    "CMS_CONFIRM_VERSION4": True,
     "ROOT_URLCONF": "tests.test_utils.urls",
     "INSTALLED_APPS": [
         "django.contrib.sitemaps",
-        "djangocms_versioning",
     ],
     "LANGUAGE_CODE": "en",
     "TIME_ZONE": "UTC",
@@ -51,6 +51,12 @@ HELPER_SETTINGS = {
         },
     },
 }
+try:
+    import djangocms_versioning  # noqa: F401
+
+    HELPER_SETTINGS["INSTALLED_APPS"].append("djangocms_versioning")
+except ImportError:
+    pass
 
 
 def run():

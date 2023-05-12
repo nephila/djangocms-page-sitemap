@@ -1,6 +1,7 @@
 from decimal import Decimal
 from unittest import skipIf
 
+import cms
 from cms.api import create_page, create_title
 from cms.test_utils.util.fuzzy_int import FuzzyInt
 from django.core.cache import cache
@@ -17,11 +18,15 @@ class SitemapTest(BaseTest):
     def test_sitemap_base(self):
         page1, page2, page3 = self.get_pages()
 
+        try:
+            title_language = page1.get_title_obj().language
+        except AttributeError:
+            title_language = page1.get_page_content_obj_attribute("language")
+
         sitemap = self.client.get("/sitemap.xml")
         test_string = (
             "<url><loc>http://example.com/%s/</loc><lastmod>%s</lastmod><changefreq>"
-            "monthly</changefreq><priority>0.5</priority></url>"
-            % (page1.get_title_obj().language, now().strftime("%Y-%m-%d"))
+            "monthly</changefreq><priority>0.5</priority></url>" % (title_language, now().strftime("%Y-%m-%d"))
         )
         self.assertContains(sitemap, test_string)
 
@@ -30,10 +35,14 @@ class SitemapTest(BaseTest):
         PageSitemapProperties.objects.create(extended_object=page1, priority="0.2", changefreq="never")
         if hasattr(page1, "publish"):
             page1.publish("it")
+
+        try:
+            title_language = page1.get_title_obj().language
+        except AttributeError:
+            title_language = page1.get_page_content_obj_attribute("language")
         test_string = (
             "<url><loc>http://example.com/%s/</loc><lastmod>%s</lastmod><changefreq>"
-            "never</changefreq><priority>0.2</priority></url>"
-            % (page1.get_title_obj().language, now().strftime("%Y-%m-%d"))
+            "never</changefreq><priority>0.2</priority></url>" % (title_language, now().strftime("%Y-%m-%d"))
         )
         sitemap = self.client.get("/sitemap.xml")
         self.assertContains(sitemap, test_string)
@@ -48,14 +57,17 @@ class SitemapTest(BaseTest):
             include_in_sitemap=False,
         )
         sitemap = ExtendedSitemap()
-        # unpublished since change, still in the sitemap
-        self.assertEqual(len(sitemap.items()), 4)
+        # If publish is available, page must be published for property to be recognized
         if hasattr(page1, "publish"):
+            # unpublished since change, still in the sitemap
+            self.assertEqual(len(sitemap.items()), 6)
             page3.publish("en")
             page3.publish("fr")
-        sitemap = ExtendedSitemap()
-        # published, then no longer in the sitemap
-        self.assertEqual(len(sitemap.items()), 4)
+            sitemap = ExtendedSitemap()
+            # published, then no longer in the sitemap
+            self.assertEqual(len(sitemap.items()), 4)
+        else:
+            self.assertEqual(len(sitemap.items()), 4)
 
     def test_sitemap_cache(self):
         page1, page2, page3 = self.get_pages()
@@ -111,6 +123,11 @@ class SitemapTest(BaseTest):
         PageSitemapProperties.objects.create(extended_object=page1, priority="0.2", changefreq="never")
         PageSitemapProperties.objects.create(extended_object=page3, priority="0.8", changefreq="hourly")
         sitemap = ExtendedSitemap()
-        max_queries = 4
-        with self.assertNumQueries(FuzzyInt(3, max_queries)):
-            self.assertEqual(len(sitemap.items()), 6)
+
+        if cms.__version__ < "4.0":
+            with self.assertNumQueries(1):
+                self.assertEqual(len(sitemap.items()), 6)
+        else:
+            max_queries = 4
+            with self.assertNumQueries(FuzzyInt(3, max_queries)):
+                self.assertEqual(len(sitemap.items()), 6)

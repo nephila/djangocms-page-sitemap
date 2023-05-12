@@ -1,8 +1,9 @@
+from unittest import skipIf
+
+import cms
 from cms.api import create_page
-from cms.models import PageContent
 from cms.test_utils.testcases import CMSTestCase
 from cms.toolbar.items import Menu, ModalItem
-from cms.toolbar.utils import get_object_preview_url
 from django.contrib.auth.models import Permission, User
 from django.test.utils import override_settings
 from django.urls import reverse
@@ -169,12 +170,16 @@ class ToolbarTest(BaseTest):
 
 
 class VersioningToolbarTest(CMSTestCase):
+    @skipIf(cms.__version__ < "4.0", "Versioning not available if django CMS < 4")
     def test_toolbar_buttons_are_not_duplicated(self):
         """
         The toolbar for djangocms-page-sitemap doesn't affect the toolbar buttons.
 
         This test Can be ran with or without versioning and should return the same result!
         """
+        from cms.models import PageContent
+        from cms.toolbar.utils import get_object_preview_url
+
         user = self.get_superuser()
         page_1 = create_page("page-one", "page.html", language="en", created_by=user)
         page_content = PageContent._original_manager.get(page=page_1, language="en")
@@ -190,5 +195,5 @@ class VersioningToolbarTest(CMSTestCase):
         create_button_list = find_toolbar_buttons("Create", response.wsgi_request.toolbar)
 
         # Only one edit and create button should exist
-        self.assertEqual(len(edit_button_list), 1)
         self.assertEqual(len(create_button_list), 1)
+        self.assertEqual(len(edit_button_list), 1)
