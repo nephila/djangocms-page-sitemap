@@ -182,7 +182,7 @@ class VersioningToolbarTest(CMSTestCase):
 
         user = self.get_superuser()
         page_1 = create_page("page-one", "page.html", language="en", created_by=user)
-        page_content = PageContent._original_manager.get(page=page_1, language="en")
+        page_content = PageContent._base_manager.get(page=page_1, language="en")
 
         if is_versioning_enabled():
             page_content.versions.first().publish(user)
@@ -192,8 +192,11 @@ class VersioningToolbarTest(CMSTestCase):
             response = self.client.post(preview_endpoint)
 
         edit_button_list = find_toolbar_buttons("Edit", response.wsgi_request.toolbar)
+        new_draft_button_list = find_toolbar_buttons("New Draft", response.wsgi_request.toolbar)
         create_button_list = find_toolbar_buttons("Create", response.wsgi_request.toolbar)
 
-        # Only one edit and create button should exist
         self.assertEqual(len(create_button_list), 1)
-        self.assertEqual(len(edit_button_list), 1)
+        if is_versioning_enabled():
+            self.assertEqual(len(new_draft_button_list), 1)
+        else:
+            self.assertEqual(len(edit_button_list), 1)
