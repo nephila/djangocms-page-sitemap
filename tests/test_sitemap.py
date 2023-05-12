@@ -51,8 +51,8 @@ class SitemapTest(BaseTest):
         # unpublished since change, still in the sitemap
         self.assertEqual(len(sitemap.items()), 4)
         if hasattr(page1, "publish"):
-            page3.publish('en')
-            page3.publish('fr')
+            page3.publish("en")
+            page3.publish("fr")
         sitemap = ExtendedSitemap()
         # published, then no longer in the sitemap
         self.assertEqual(len(sitemap.items()), 4)
