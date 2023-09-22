@@ -8,15 +8,15 @@ django CMS page extension to handle sitemap customization
 
 Support Python version:
 
-* Python 3.7, 3.8, 3.9, 3.10
+* Python 3.9, 3.10, 3.11
 
 Supported Django versions:
 
-* Django 2.2, 3.2
+* Django 3.2, 4.1, 4.2
 
 Supported django CMS versions:
 
-* django CMS 3.7 - 3.10
+* django CMS 3.9, 3.11
 
 .. note:: djangocms-page-sitemap 0.8 has been relicensed with BSD license.
 
