@@ -14,10 +14,7 @@ from .utils import get_cache_key
 @extension_pool.register
 class PageSitemapProperties(PageExtension):
     changefreq = models.CharField(
-        _("Change frequency"),
-        max_length=20,
-        default="monthly",
-        choices=PAGE_SITEMAP_CHANGEFREQ_LIST.items(),
+        _("Change frequency"), max_length=20, default="monthly", choices=PAGE_SITEMAP_CHANGEFREQ_LIST.items()
     )
     priority = models.DecimalField(
         _("Priority"),
@@ -28,14 +25,10 @@ class PageSitemapProperties(PageExtension):
     )
     include_in_sitemap = models.BooleanField(_("Include in sitemap"), default=True)
     noindex = models.BooleanField(
-        _("Mark as no index"),
-        default=False,
-        help_text=_("Add meta tag robots with value noindex"),
+        _("Mark as no index"), default=False, help_text=_("Add meta tag robots with value noindex")
     )
     noarchive = models.BooleanField(
-        _("Mark as no archive"),
-        default=False,
-        help_text=_("Add meta tag robots with value noarchive"),
+        _("Mark as no archive"), default=False, help_text=_("Add meta tag robots with value noarchive")
     )
     robots_extra = models.CharField(
         _("Extra robots value"),

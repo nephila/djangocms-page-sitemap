@@ -1,7 +1,3 @@
-from cms.api import get_page_draft
-from cms.cms_toolbars import PAGE_MENU_THIRD_BREAK
-from cms.toolbar.items import Break
-from cms.toolbar_base import CMSToolbar
 from cms.toolbar_pool import toolbar_pool
 from cms.utils.conf import get_cms_setting
 from cms.utils.permissions import has_page_permission
@@ -10,14 +6,20 @@ from django.utils.translation import gettext_lazy as _
 
 from .models import PageSitemapProperties
 
+# Handle versioned toolbar if it exists, otherwise just use the normal CMS toolbar
+try:
+    from djangocms_versioning.cms_toolbars import VersioningPageToolbar as PageToolbar
+except ImportError:
+    from cms.cms_toolbars import PageToolbar
+
+
 PAGE_SITEMAP_MENU_TITLE = _("Sitemap properties")
 
 
 @toolbar_pool.register
-class PageSitemapPropertiesMeta(CMSToolbar):
+class PageSitemapPropertiesMeta(PageToolbar):
     def populate(self):
-        # always use draft if we have a page
-        self.page = get_page_draft(self.request.current_page)
+        self.page = self.request.current_page
         if not self.page:
             return
         if self.page.is_page_type:
@@ -36,7 +38,6 @@ class PageSitemapPropertiesMeta(CMSToolbar):
         if has_global_current_page_change_permission or can_change:
             not_edit_mode = not self.toolbar.edit_mode_active
             current_page_menu = self.toolbar.get_or_create_menu("page")
-            position = current_page_menu.find_first(Break, identifier=PAGE_MENU_THIRD_BREAK) - 1
             # Page tags
             try:
                 page_extension = PageSitemapProperties.objects.get(extended_object_id=self.page.pk)
@@ -45,21 +46,14 @@ class PageSitemapPropertiesMeta(CMSToolbar):
             try:
                 if page_extension:
                     url = reverse(
-                        "admin:djangocms_page_sitemap_pagesitemapproperties_change",
-                        args=(page_extension.pk,),
+                        "admin:djangocms_page_sitemap_pagesitemapproperties_change", args=(page_extension.pk,)
                     )
                 else:
                     url = "{}?extended_object={}".format(
-                        reverse("admin:djangocms_page_sitemap_pagesitemapproperties_add"),
-                        self.page.pk,
+                        reverse("admin:djangocms_page_sitemap_pagesitemapproperties_add"), self.page.pk
                     )
             except NoReverseMatch:  # pragma: no cover
                 # not in urls
                 pass
             else:
-                current_page_menu.add_modal_item(
-                    PAGE_SITEMAP_MENU_TITLE,
-                    url=url,
-                    disabled=not_edit_mode,
-                    position=position,
-                )
+                current_page_menu.add_modal_item(PAGE_SITEMAP_MENU_TITLE, url=url, disabled=not_edit_mode)

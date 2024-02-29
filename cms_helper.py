@@ -6,9 +6,6 @@ def gettext(s):
 
 
 HELPER_SETTINGS = {
-    "NOSE_ARGS": [
-        "-s",
-    ],
     "CACHES": {
         "default": {
             "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
@@ -19,6 +16,7 @@ HELPER_SETTINGS = {
         "content": 10,
         "permissions": 10,
     },
+    "CMS_CONFIRM_VERSION4": True,
     "ROOT_URLCONF": "tests.test_utils.urls",
     "INSTALLED_APPS": [
         "django.contrib.sitemaps",
@@ -53,6 +51,12 @@ HELPER_SETTINGS = {
         },
     },
 }
+try:
+    import djangocms_versioning  # noqa: F401
+
+    HELPER_SETTINGS["INSTALLED_APPS"].append("djangocms_versioning")
+except ImportError:
+    pass
 
 
 def run():
