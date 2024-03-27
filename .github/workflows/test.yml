@@ -9,15 +9,14 @@ jobs:
     continue-on-error: ${{ matrix.continue-on-error }}
     strategy:
       matrix:
-        python-version: ["3.11", "3.10", "3.9"]
-        django: [42, 41, 32]
-        cms: [311, 39]
+        python-version: ["3.8", "3.9", "3.10"]
+        django: [32, 42]
+        cms: [40]
+        requirements-file: [
+            dj32_cms40.txt,
+            dj42_cms40.txt,
+        ]
         continue-on-error: [true]
-        exclude:
-          - django: 41
-            cms: 39
-          - django: 42
-            cms: 39
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
@@ -40,6 +39,8 @@ jobs:
           ${{ runner.os }}-tox-${{ format('{{py{0}-django{1}-cms{2}}}', matrix.python-version, matrix.django, matrix.cms) }}-
     - name: Install dependencies
       run: |
+        python setup.py install
+        pip install -r tests/requirements/dj${{matrix.django}}_cms${{matrix.cms}}.txt
         sudo apt-get install gettext
         python -m pip install --upgrade pip setuptools tox>4
     - name: Test with tox

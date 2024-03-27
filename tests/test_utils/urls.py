@@ -11,6 +11,11 @@ from djangocms_page_sitemap import sitemap_urls
 admin.autodiscover()
 
 urlpatterns = [
+    re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT, "show_indexes": True}),
+    re_path(
+        r"^media/cms/(?P<path>.*)$", serve, {"document_root": get_cms_setting("MEDIA_ROOT"), "show_indexes": True}
+    ),
+    path("", include(sitemap_urls)),
     re_path(
         r"^media/(?P<path>.*)$",
         serve,

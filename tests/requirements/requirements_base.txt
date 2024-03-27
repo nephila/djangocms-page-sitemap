@@ -1,0 +1,7 @@
+-e .[docs]
+coverage>5
+coveralls>2
+mock>=1.0.1
+django-app-helper>=2.0.0
+
+https://github.com/django-cms/django-cms/tarball/release/4.0.1.x#egg=django-cms
