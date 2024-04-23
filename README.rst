@@ -1,5 +1,5 @@
 ======================
-djangocms-page-sitemap
+djangocms-page-sitemap-fil
 ======================
 
 |Gitter| |PyPiVersion| |PyVersion| |Status| |TestCoverage| |CodeClimate| |License|
@@ -21,6 +21,8 @@ Supported django CMS versions:
 .. note:: djangocms-page-sitemap 0.8 has been relicensed with BSD license.
 
 .. note:: djangocms-page-sitemap 1.0 dropped compatibility with Python 2 and  Django < 2.2
+
+.. note:: djangocms-page-sitemap 2.1.0 moved to FidelityInternational org and renamed to djangocms-page-sitemap-fil dropped compatibility with Python < 3.8 and  Django < 3.2
 
 ********
 Features
@@ -150,12 +152,7 @@ Settings
 
 
 .. _page lookup: https://docs.django-cms.org/en/reference/templatetags.html#page_lookup
-.. _django-app-enabler: https://github.com/nephila/django-app-enabler
-
-
-.. |Gitter| image:: https://img.shields.io/badge/GITTER-join%20chat-brightgreen.svg?style=flat-square
-    :target: https://gitter.im/nephila/applications
-    :alt: Join the Gitter chat
+.. _django-app-enabler: https://github.com/FidelityInternational/django-app-enabler
 
 .. |PyPiVersion| image:: https://img.shields.io/pypi/v/djangocms-page-sitemap.svg?style=flat-square
     :target: https://pypi.python.org/pypi/djangocms-page-sitemap
@@ -165,18 +162,18 @@ Settings
     :target: https://pypi.python.org/pypi/djangocms-page-sitemap
     :alt: Python versions
 
-.. |Status| image:: https://img.shields.io/travis/nephila/djangocms-page-sitemap.svg?style=flat-square
-    :target: https://travis-ci.org/nephila/djangocms-page-sitemap
+.. |Status| image:: https://img.shields.io/travis/FidelityInternational/djangocms-page-sitemap-fil.svg?style=flat-square
+    :target: https://travis-ci.org/FidelityInternational/djangocms-page-sitemap-fil
     :alt: Latest Travis CI build status
 
-.. |TestCoverage| image:: https://img.shields.io/coveralls/nephila/djangocms-page-sitemap/master.svg?style=flat-square
-    :target: https://coveralls.io/r/nephila/djangocms-page-sitemap?branch=master
+.. |TestCoverage| image:: https://img.shields.io/coveralls/FidelityInternational/djangocms-page-sitemap-fil/master.svg?style=flat-square
+    :target: https://coveralls.io/r/FidelityInternational/djangocms-page-sitemap-fil?branch=master
     :alt: Test coverage
 
-.. |License| image:: https://img.shields.io/github/license/nephila/djangocms-page-sitemap.svg?style=flat-square
+.. |License| image:: https://img.shields.io/github/license/FidelityInternational/djangocms-page-sitemap-fil.svg?style=flat-square
    :target: https://pypi.python.org/pypi/djangocms-page-sitemap/
     :alt: License
 
-.. |CodeClimate| image:: https://codeclimate.com/github/nephila/djangocms-page-sitemap/badges/gpa.svg?style=flat-square
-   :target: https://codeclimate.com/github/nephila/djangocms-page-sitemap
+.. |CodeClimate| image:: https://codeclimate.com/github/FidelityInternational/djangocms-page-sitemap-fil/badges/gpa.svg?style=flat-square
+   :target: https://codeclimate.com/github/FidelityInternational/djangocms-page-sitemap-fil
    :alt: Code Climate

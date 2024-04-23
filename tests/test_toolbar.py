@@ -173,7 +173,7 @@ class VersioningToolbarTest(CMSTestCase):
     @skipIf(cms.__version__ < "4.0", "Versioning not available if django CMS < 4")
     def test_toolbar_buttons_are_not_duplicated(self):
         """
-        The toolbar for djangocms-page-sitemap doesn't affect the toolbar buttons.
+        The toolbar for djangocms-page-sitemap-fil doesn't affect the toolbar buttons.
 
         This test Can be ran with or without versioning and should return the same result!
         """

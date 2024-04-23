@@ -1,5 +1,5 @@
 {
-    "package-name": "djangocms-page-sitemap",
+    "package-name": "djangocms-page-sitemap-fil",
     "installed-apps": [
         "django.contrib.sitemaps",
         "djangocms_page_sitemap"

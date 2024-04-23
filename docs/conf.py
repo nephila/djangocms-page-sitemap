@@ -48,7 +48,7 @@ source_suffix = ".rst"
 master_doc = "index"
 
 # General information about the project.
-project = "djangocms-page-sitemap"
+project = "djangocms-page-sitemap-fil"
 copyright = "2014, Iacopo Spalletti"  # noqa # A001
 
 # The version info for the project you're documenting, acts as replacement for
