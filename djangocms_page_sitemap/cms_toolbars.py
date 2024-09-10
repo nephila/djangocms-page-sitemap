@@ -23,7 +23,7 @@ class PageSitemapPropertiesMeta(CMSToolbar):
             # we don't need this on page types
             return
 
-        # check if user has page change permission (respects CMS_PERMISSIONS)
+        # check if user has page change permission (respects CMS_PERMISSION)
         can_change = self.request.current_page and self.request.current_page.has_change_permission(self.request.user)
         if can_change:
             not_edit_mode = not self.toolbar.edit_mode_active
