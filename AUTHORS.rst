@@ -13,6 +13,7 @@ Contributors
 * Anton Egorov
 * carderm
 * Dennis Schwertel
+* Fabian Braun
 * Fabrice Pardo
 * fp4code
 * Jeroen Peters
