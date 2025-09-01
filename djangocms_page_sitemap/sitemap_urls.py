@@ -1,8 +1,8 @@
 from django.contrib.sitemaps.views import sitemap
-from django.urls import re_path
+from django.urls import path
 
 from .sitemap import ExtendedSitemap
 
 urlpatterns = [
-    re_path(r"^sitemap\.xml$", sitemap, {"sitemaps": {"cmspages": ExtendedSitemap}}),
+    path("sitemap.xml", sitemap, {"sitemaps": {"cmspages": ExtendedSitemap}}),
 ]
